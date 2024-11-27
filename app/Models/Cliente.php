@@ -10,11 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 
 
-class Cliente extends Model
+class Cliente extends Authenticatable
 {
-    #use HasApiTokens, HasFactory, Notifiable;
-
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = "cliente";
     protected $primaryKey = 'id_cliente'; // Define a PK como UUID

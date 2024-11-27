@@ -35,12 +35,28 @@ return [
     |
     */
 
-    'guards' => [
+    'guards' =>
+    [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'funcionario' =>
+        [
+            'driver' => 'session',
+            'provider' => 'funcionario',
+        ],
+
+        'cliente' =>
+        [
+            'driver' => 'session',
+            'provider' => 'cliente',
+        ],
     ],
+
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -57,7 +73,8 @@ return [
     |
     | Supported: "database", "eloquent"
     |
-    */    
+    */
+    /*
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
@@ -69,6 +86,23 @@ return [
         //     'table' => 'users',
         // ],
     ],
+    */
+
+    'providers' => [
+        'funcionario' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Funcionario::class,
+        ],
+        'cliente' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Cliente::class,
+        ],
+    ],
+    
+
+
+
+
 
     /*
     |--------------------------------------------------------------------------

@@ -43,6 +43,8 @@ use App\Http\Controllers\Produto_Controller;
 	*/
 		Route::get("/", [Cliente_Controller::class, 'view_login']);
 		Route::get("/Login Cliente", [Cliente_Controller::class, 'view_login']);
+
+		Route::post("Fazer login", [Cliente_Controller::class, "fazer_login"]);
 /*
 |--------------------------------------------------------------------------
 | GET
