@@ -90,7 +90,7 @@ use App\Http\Controllers\Produto_Controller;
 	| CLIENTE
 	|----------------------------------------------------------------------
 	*/
-
+		Route::post("/Cadastrar Cliente", [Cliente_Controller::class, 'cadastrar_cliente']);
 	/*
 	|----------------------------------------------------------------------
 	| PRODUTO

@@ -8,9 +8,6 @@ class Usuario extends Authenticatable
 {
 
 
-
-
-
 	/*
     use HasApiTokens, HasFactory, Notifiable;
 

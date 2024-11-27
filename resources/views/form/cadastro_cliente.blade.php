@@ -11,50 +11,52 @@
 
 
 
-<form>
-
+<form action="Cadastrar Cliente" method="POST">
+@csrf
 <div data-mdb-input-init class="form-outline mb-4">
-    <input type="text" name="input_nome"
+    <input type="text" name="input_nome_cliente"
+    placeholder="Marcos Vinicius Ruan Elias Ferreira" 
+    id="id_nome_cliente" class="form-control" />
+    <label class="form-label" for="id_nome_cliente">Nome Completo</label>
+  </div>
+
+  <div data-mdb-input-init class="form-outline mb-4">
+    <input type="email" name="input_email_cliente"
     placeholder="Cliente@email.com" 
-    id="id_nome" class="form-control" />
-    <label class="form-label" for="id_nome">Nome Completo</label>
-  </div>
-
-  <div data-mdb-input-init class="form-outline mb-4">
-    <input type="email" name="input_email"
-    placeholder="Cliente@email.com" 
-    id="id_email" class="form-control" />
-    <label class="form-label" for="id_email">Email</label>
+    id="id_email_cliente" class="form-control" />
+    <label class="form-label" for="id_email_cliente">Email</label>
   </div>
 
 
   <div data-mdb-input-init class="form-outline mb-4">
-    <input type="password" name="input_password"
-    id="id_senha" class="form-control" />
-    <label class="form-label" for="id_senha">Senha</label>
+    <input type="password" name="input_password_cliente"
+    id="id_senha_cliente" class="form-control" />
+    <label class="form-label" for="id_senha_cliente">Senha</label>
   </div>
 
   <div data-mdb-input-init class="form-outline mb-4">
-    <input type="password" name="input_confirmar_password"
-    id="id_confirmar_senha" class="form-control" />
-    <label class="form-label" for="id_confirmar_senha">Confirmar senha</label>
+    <input type="password" name="input_confirmar_password_cliente"
+    id="id_confirmar_senha_cliente" class="form-control" />
+    <label class="form-label" for="id_confirmar_senha_cliente">Confirmar senha</label>
   </div>
 
   <div data-mdb-input-init class="form-outline mb-4">
-    <input type="text" id="id_CPF" class="form-control" />
-    <label class="form-label" for="id_CPF">CPF</label>
+    <input type="text" name="input_CPF_cliente" 
+    id="id_CPF_cliente" class="form-control"/>
+    <label class="form-label" for="id_CPF_cliente">CPF</label>
   </div>
 
 
   <div data-mdb-input-init class="form-outline mb-4">
-    <input type="date" id="id_nascimento" class="form-control" />
+    <input type="date" name="input_nascimento_cliente" 
+    id="id_nascimento_cliente" class="form-control" />
     <label class="form-label" for="id_nascimento">Data de nascimento</label>
   </div>
 
 
 <div class="form-check">
   <input class="form-check-input"
-  type="radio" name="input_sexo" value="M"
+  type="radio" name="input_sexo_cliente" value="M"
   id="id_masculino">
   <label class="form-check-label" for="id_masculino">
     Masculino
@@ -62,7 +64,7 @@
 </div>
 <div class="form-check">
   <input class="form-check-input"
-  type="radio" name="input_sexo" value="F"
+  type="radio" name="input_sexo_cliente" value="F"
   id="id_feminino">
   <label class="form-check-label" for="id_feminino">
     Feminino
@@ -72,9 +74,8 @@
 
 
   <!-- Submit button -->
-  <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Sign in</button>
+  <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Cadastrar</button>
 
-  <!-- Register buttons -->
 </form>
 
 
