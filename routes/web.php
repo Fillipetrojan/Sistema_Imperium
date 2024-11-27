@@ -66,6 +66,12 @@ use App\Http\Controllers\Produto_Controller;
 
 		Route::get("/Cadastro Cliente", [Cliente_Controller::class, 'form_cadastro_cliente']);
 
+
+		Route::middleware(['auth:cliente'])->group(function ()
+		{
+			Route::get("Consultar Produtos", [Cliente_Controller::class, "consultar_produtos_cliente"]);
+		});
+
 	/*
 	|----------------------------------------------------------------------
 	| PRODUTO

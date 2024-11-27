@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 
 
+use App\Models\Endereco;
+use App\Models\Contato;
+
 class Cliente extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -39,6 +42,17 @@ class Cliente extends Authenticatable
         $model->id_cliente = (string) \Illuminate\Support\Str::uuid();
         #dd($model->id_cliente); // Verifique se o UUID está sendo gerado aqui
         });
+    }
+
+    public function endereco()
+    {
+        return $this->hasMany(Endereco::class, "id_dono");
+    }
+
+
+    public function contato()
+    {
+        return $this->hasMany(Endereco::class, "id_dono");
     }
 
 
