@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 
 class Funcionario extends Authenticatable
 {
@@ -16,6 +17,7 @@ class Funcionario extends Authenticatable
     protected $primaryKey = 'id_funcionario'; // Define a PK como UUID
     public $incrementing = false; // Não é auto-incremental
     protected $keyType = 'string'; // Tipo da PK é string
+    public $timestamps = false;
     protected $fillable =[
     	"nome_funcionario",
     	"CPF_funcionario",

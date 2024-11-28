@@ -35,6 +35,7 @@ use App\Http\Controllers\Produto_Controller;
 	*/
 
 		Route::get("/Login Funcionario", [Funcionario_Controller::class, 'view_login']);
+		Route::post("Fazer login Funcionario", [Funcionario_Controller::class, "fazer_login"]);
 
 	/*
 	|----------------------------------------------------------------------
@@ -44,7 +45,7 @@ use App\Http\Controllers\Produto_Controller;
 		Route::get("/", [Cliente_Controller::class, 'view_login']);
 		Route::get("/Login Cliente", [Cliente_Controller::class, 'view_login']);
 
-		Route::post("Fazer login", [Cliente_Controller::class, "fazer_login"]);
+		Route::post("Fazer login Cliente", [Cliente_Controller::class, "fazer_login"]);
 /*
 |--------------------------------------------------------------------------
 | GET
@@ -57,6 +58,14 @@ use App\Http\Controllers\Produto_Controller;
 	| FUNCIONARIO
 	|----------------------------------------------------------------------
 	*/
+
+
+		Route::get("/Cadastro Funcionario", [Funcionario_Controller::class, 'form_cadastro_funcionario']);
+
+		Route::middleware(['auth:funcionario'])->group(function ()
+		{
+			Route::get("Cadastro Produto", [Produto_Controller::class, "form_cadastro_produto"]);
+		});
 
 	/*
 	|----------------------------------------------------------------------
@@ -92,7 +101,7 @@ use App\Http\Controllers\Produto_Controller;
 	| FUNCIONARIO
 	|----------------------------------------------------------------------
 	*/
-
+		Route::post("/Cadastrar Funcionario", [Funcionario_Controller::class, 'cadastrar_funcionario']);
 	/*
 	|----------------------------------------------------------------------
 	| CLIENTE
@@ -105,7 +114,7 @@ use App\Http\Controllers\Produto_Controller;
 	|----------------------------------------------------------------------
 	*/
 
-
+		Route::post("/Cadastrar Produto", [Produto_Controller::class, 'cadastrar_produto']);
 
 
 /*

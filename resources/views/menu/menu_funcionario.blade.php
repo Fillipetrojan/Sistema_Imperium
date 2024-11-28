@@ -25,9 +25,11 @@
     	float: left;
     	position: relative;
     }
-    .Teste
+    .frame
     {
-    	margin-top: 10px;
+    	margin-left: 20px;
+        width: 60%;
+
     }
 
     body
@@ -55,18 +57,18 @@
 
 
 	<ul>
-    	<li><a href="Consultar Produtos" class="mymenu" title="Home">Produtos</a></li>
+    	<li><a href="Cadastro Produto" class="mymenu" title="Home">Cadastrar produto</a></li>
     	<li><a href="Atualizar Dados" class="mymenu" title="Sobre">Atualizar dados cadastrais</a></li>
     	<li><a href="Suporte" class="mymenu" title="Portfolio">Suporte</a></li>
     	<li><a href="Contato" class="mymenu" title="Contato">Contato</a></li>
 	</ul>
 
 
-			
+<div class="frame">			
 @yield('content')
-
+</div>
 
 	
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

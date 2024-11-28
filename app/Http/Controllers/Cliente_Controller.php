@@ -74,7 +74,7 @@ class Cliente_Controller extends Controller
 	| INSERT
 	|----------------------------------------------------------------------
 	*/
-		public function cadastrar_cliente (Cliente $cliente, Endereco $endereco, Contato $contato, Request $request,)
+		public function cadastrar_cliente (Cliente $cliente, Endereco $endereco, Contato $contato, Request $request)
         {	
 
         	DB::beginTransaction();
@@ -121,7 +121,8 @@ class Cliente_Controller extends Controller
         			['error' => 'Erro ao criar cliente' . $e->getMessage()], 500
         		);
         	}
-        }
+
+        }//public function cadastrar_cliente
 
 
     /*
@@ -129,7 +130,6 @@ class Cliente_Controller extends Controller
 	| CONSULT
 	|----------------------------------------------------------------------
 	*/
-
 
 		public function consultar_produtos_cliente()
 		{
