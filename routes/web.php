@@ -58,8 +58,6 @@ use App\Http\Controllers\Produto_Controller;
 	| FUNCIONARIO
 	|----------------------------------------------------------------------
 	*/
-
-
 		Route::get("/Cadastro Funcionario", [Funcionario_Controller::class, 'form_cadastro_funcionario']);
 
 		Route::middleware(['auth:funcionario'])->group(function ()
@@ -78,7 +76,7 @@ use App\Http\Controllers\Produto_Controller;
 
 		Route::middleware(['auth:cliente'])->group(function ()
 		{
-			Route::get("Consultar Produtos", [Cliente_Controller::class, "consultar_produtos_cliente"]);
+			Route::get("Consultar Produtos", [Produto_Controller::class, "cliente_consultar_produtos"]);
 		});
 
 	/*

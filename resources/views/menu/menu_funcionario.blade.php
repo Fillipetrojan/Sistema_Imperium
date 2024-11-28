@@ -25,11 +25,10 @@
     	float: left;
     	position: relative;
     }
-    .frame
+    .input_margin
     {
     	margin-left: 20px;
         width: 60%;
-
     }
 
     body
@@ -41,14 +40,17 @@
     {
     	width: 80%;
     }
-
+    .img_resolucao
+    {
+        width: 100px;
+        height: 200px;
+        object-fit: cover; /* Ajusta a imagem para caber sem distorção */
+    }
 
 
 </style>
 
-
 <link rel="stylesheet" href="{{ asset('CSS/Menu_cliente.css') }}">
-
 
 </script>
 
@@ -63,12 +65,8 @@
     	<li><a href="Contato" class="mymenu" title="Contato">Contato</a></li>
 	</ul>
 
-
-<div class="frame">			
 @yield('content')
-</div>
 
-	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -30,7 +30,21 @@ class Produto_Controller extends Controller
 	*/
 
 
+		public function cliente_consultar_produtos()
+		{
+			$produto=Produto::select(
+				"id_produto",
+				"nome_produto",
+				"valor_produto",
+				"imagem_produto")->get();
 
+
+
+
+			return view("consult.consultar_produtos_cliente", compact("produto"));
+
+
+		}
 
 	/*
 	|----------------------------------------------------------------------

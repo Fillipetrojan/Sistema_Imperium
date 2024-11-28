@@ -131,11 +131,6 @@ class Cliente_Controller extends Controller
 	|----------------------------------------------------------------------
 	*/
 
-		public function consultar_produtos_cliente()
-		{
-
-			return view("consult.consultar_produtos_cliente");
-		}
 
 	/*
 	|----------------------------------------------------------------------

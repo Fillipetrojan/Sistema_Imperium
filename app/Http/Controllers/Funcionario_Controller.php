@@ -24,14 +24,11 @@ class Funcionario_Controller extends Controller
 		{
 			return view("form.cadastro_funcionario");
 		}
-
-
 	/*
 	|----------------------------------------------------------------------
 	| INSERT
 	|----------------------------------------------------------------------
 	*/
-
 		public function cadastrar_funcionario(Funcionario $funcionario,
 			Endereco $endereco, Contato $contato, Request $request)
         {
@@ -68,7 +65,6 @@ class Funcionario_Controller extends Controller
 		        $contato->numero_contato=$request->input_numero_contato;
 		        $contato->save();
 
-
 	            DB::commit();
 	            return back();
 
@@ -82,7 +78,6 @@ class Funcionario_Controller extends Controller
         	}
         }
 		
-
 	/*
 	|----------------------------------------------------------------------
 	| LOGIN
@@ -95,28 +90,26 @@ class Funcionario_Controller extends Controller
 	}
 
 	public function fazer_login(Request $request)
-		{
+	{
 
-			$email_funcionario = $request->input_email_funcionario;
+		$email_funcionario = $request->input_email_funcionario;
+        $senha_funcionario=$request->input_senha_funcionario;
 
-        	$senha_funcionario=$request->input_senha_funcionario;
+		if (Auth::guard('funcionario')->
+		attempt(['email_funcionario' => $email_funcionario, "password" => $senha_funcionario]))
+	    {
+	    	$request->session()->regenerate();
+			$usuario = funcionario::where('email_funcionario', $email_funcionario)
+	        ->first();
 
-			if (Auth::guard('funcionario')->
-				attempt(['email_funcionario' => $email_funcionario, "password" => $senha_funcionario]))
-	        {
-	            $request->session()->regenerate();
-
-	            $usuario = funcionario::where('email_funcionario', $email_funcionario)
-	                        ->first();
-
-	            session(['usuario_id' => $usuario->id_funcionario]);
-	            session(['usuario_email' => $usuario->email_funcionario]);
+	        session(['usuario_id' => $usuario->id_funcionario]);
+	        session(['usuario_email' => $usuario->email_funcionario]);
 
 
-	            return redirect()->intended('/Consultar Produtos');
-	        }else
-	        {
-	            echo "Erro.";
-	        }
-		}
+	        return redirect()->intended('/Cadastro Produto');
+	    }else
+	    {
+	        return back();
+	    }
+	}
 }

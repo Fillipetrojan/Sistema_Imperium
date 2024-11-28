@@ -10,12 +10,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-
-
-
-
-
-
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 <style type="text/css">
@@ -25,11 +19,11 @@
     	float: left;
     	position: relative;
     }
-    .Teste
+    .input_margin
     {
-    	margin-top: 10px;
+        margin-left: 20px;
+        width: 80%;
     }
-
     body
     {
         margin-bottom: 50px;
@@ -40,19 +34,20 @@
     	width: 80%;
     }
 
-
+    .img_resolucao
+    {
+        width: auto;
+        object-fit: cover; /* Ajusta a imagem para caber sem distorção */
+    }
 
 </style>
 
-
 <link rel="stylesheet" href="{{ asset('CSS/Menu_cliente.css') }}">
-
 
 </script>
 
 </head>
 <body>
-
 
 	<ul>
     	<li><a href="Consultar Produtos" class="mymenu" title="Home">Produtos</a></li>
@@ -60,13 +55,10 @@
     	<li><a href="Suporte" class="mymenu" title="Portfolio">Suporte</a></li>
     	<li><a href="Contato" class="mymenu" title="Contato">Contato</a></li>
 	</ul>
-
-
-			
+     
 @yield('content')
 
 
-	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
