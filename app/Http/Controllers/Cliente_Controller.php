@@ -63,18 +63,28 @@ class Cliente_Controller extends Controller
 	            session(['usuario_email' => $usuario->email_cliente]);
 
 
-	            return redirect()->intended('/Consultar Produtos');
+	            return redirect()->intended('Cliente/Consultar Produtos');
 	        }else
 	        {
 	            
 	        }
 		}
+
+
+
+		public function logout(Request $request)
+    	{
+	        Auth::logout();
+	        $request->session()->invalidate();
+
+	        return redirect('Login Cliente');
+    	}
 	/*
 	|----------------------------------------------------------------------
 	| INSERT
 	|----------------------------------------------------------------------
 	*/
-		public function cadastrar_cliente (Cliente $cliente, Endereco $endereco, Contato $contato, Request $request)
+		public function cadastrar_cliente(Cliente $cliente, Endereco $endereco, Contato $contato, Request $request)
         {	
 
         	DB::beginTransaction();

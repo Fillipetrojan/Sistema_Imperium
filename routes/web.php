@@ -62,7 +62,9 @@ use App\Http\Controllers\Produto_Controller;
 
 		Route::middleware(['auth:funcionario'])->group(function ()
 		{
-			Route::get("Cadastro Produto", [Produto_Controller::class, "form_cadastro_produto"]);
+			Route::get("Funcionario/Cadastro Produto", [Produto_Controller::class, "form_cadastro_produto"]);
+
+			Route::get("Funcionario/Logout", [Funcionario_Controller::class, "logout"]);
 		});
 
 	/*
@@ -73,10 +75,13 @@ use App\Http\Controllers\Produto_Controller;
 
 		Route::get("/Cadastro Cliente", [Cliente_Controller::class, 'form_cadastro_cliente']);
 
-
 		Route::middleware(['auth:cliente'])->group(function ()
 		{
-			Route::get("Consultar Produtos", [Produto_Controller::class, "cliente_consultar_produtos"]);
+			Route::get("Cliente/Consultar Produtos", [Produto_Controller::class, "cliente_consultar_produtos"]);
+
+			Route::get("Cliente/Cadastro Endereco", [Endereco_Controller::class, "form_cadastro_endereco"]);
+
+			Route::get("Cliente/Logout", [Cliente_Controller::class, "logout"]);
 		});
 
 	/*
@@ -85,7 +90,11 @@ use App\Http\Controllers\Produto_Controller;
 	|----------------------------------------------------------------------
 	*/
 
+		Route::middleware(['auth:cliente'])->group(function ()
+		{
 
+			Route::get("Cliente/Apagar Carrinho", [Produto_Controller::class, "apagar_carrinho"]);
+		});
 
 /*
 |--------------------------------------------------------------------------
@@ -112,7 +121,17 @@ use App\Http\Controllers\Produto_Controller;
 	|----------------------------------------------------------------------
 	*/
 
-		Route::post("/Cadastrar Produto", [Produto_Controller::class, 'cadastrar_produto']);
+		Route::middleware(['auth:cliente'])->group(function ()
+		{
+			Route::post("Cliente/Adicionar Ao Carrinho", [Produto_Controller::class, "adicionar_ao_carrinho"]);
+		});
+
+		Route::middleware(['auth:funcionario'])->group(function ()
+		{
+			Route::post("/Cadastrar Produto", [Produto_Controller::class, 'cadastrar_produto']);
+		});
+
+		
 
 
 /*

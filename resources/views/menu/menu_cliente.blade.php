@@ -51,9 +51,11 @@
 
 	<ul>
     	<li><a href="Consultar Produtos" class="mymenu" title="Home">Produtos</a></li>
-    	<li><a href="Atualizar Dados" class="mymenu" title="Sobre">Atualizar dados cadastrais</a></li>
+    	<li><a href="Atualizar Dados" class="mymenu" title="Sobre">Cadastrar em endereço</a></li>
     	<li><a href="Suporte" class="mymenu" title="Portfolio">Suporte</a></li>
-    	<li><a href="Contato" class="mymenu" title="Contato">Contato</a></li>
+    	<li><a href="Apagar Carrinho" class="mymenu" title="Contato">Apagar Carrinho</a></li>
+        <li><a href="Ver Carrinho" class="mymenu" title="Contato">Ver Carrinho</a></li>
+        <li><a href="Logout" class="mymenu" title="Contato">Sair</a></li>
 	</ul>
      
 @yield('content')

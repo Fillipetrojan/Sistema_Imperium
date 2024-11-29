@@ -60,9 +60,10 @@
 
 	<ul>
     	<li><a href="Cadastro Produto" class="mymenu" title="Home">Cadastrar produto</a></li>
-    	<li><a href="Atualizar Dados" class="mymenu" title="Sobre">Atualizar dados cadastrais</a></li>
+    	<li><a href="Cadastro Endereco" class="mymenu" title="Sobre">Cadastrar um endereço</a></li>
     	<li><a href="Suporte" class="mymenu" title="Portfolio">Suporte</a></li>
     	<li><a href="Contato" class="mymenu" title="Contato">Contato</a></li>
+        <li><a href="Logout" class="mymenu" title="Contato">Sair</a></li>
 	</ul>
 
 @yield('content')

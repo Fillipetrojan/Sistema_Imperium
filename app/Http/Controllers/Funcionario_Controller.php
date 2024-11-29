@@ -19,7 +19,6 @@ class Funcionario_Controller extends Controller
 	| FORM
 	|----------------------------------------------------------------------
 	*/
-
 		public function form_cadastro_funcionario()
 		{
 			return view("form.cadastro_funcionario");
@@ -84,32 +83,49 @@ class Funcionario_Controller extends Controller
 	|----------------------------------------------------------------------
 	*/
 
-	public function view_login()
-	{
-		return view("login.login_funcionario");
-	}
+		public function view_login()
+		{
+			return view("login.login_funcionario");
+		}
 
-	public function fazer_login(Request $request)
-	{
+		public function fazer_login(Request $request)
+		{
 
-		$email_funcionario = $request->input_email_funcionario;
-        $senha_funcionario=$request->input_senha_funcionario;
+			$email_funcionario = $request->input_email_funcionario;
+	        $senha_funcionario=$request->input_senha_funcionario;
 
-		if (Auth::guard('funcionario')->
-		attempt(['email_funcionario' => $email_funcionario, "password" => $senha_funcionario]))
-	    {
-	    	$request->session()->regenerate();
-			$usuario = funcionario::where('email_funcionario', $email_funcionario)
-	        ->first();
+			if (Auth::guard('funcionario')->
+			attempt(['email_funcionario' => $email_funcionario, "password" => $senha_funcionario]))
+		    {
+		    	$request->session()->regenerate();
+				$usuario = funcionario::where('email_funcionario', $email_funcionario)
+		        ->first();
 
-	        session(['usuario_id' => $usuario->id_funcionario]);
-	        session(['usuario_email' => $usuario->email_funcionario]);
+		        session(['usuario_id' => $usuario->id_funcionario]);
+		        session(['usuario_email' => $usuario->email_funcionario]);
+		        return redirect()->intended('Funcionario/Cadastro Produto');
+		    }else
+		    {
+		        return back();
+		    }
+		}
 
 
-	        return redirect()->intended('/Cadastro Produto');
-	    }else
-	    {
-	        return back();
-	    }
-	}
+		public function logout(Request $request)
+    	{
+	        Auth::logout();
+	        $request->session()->invalidate();
+
+	        return redirect('Login Funcionario');
+    	}
+
+
+
+	/*
+	|----------------------------------------------------------------------
+	| UPDATE
+	|----------------------------------------------------------------------
+	*/
+
+
 }
