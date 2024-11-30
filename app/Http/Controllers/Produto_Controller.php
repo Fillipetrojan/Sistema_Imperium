@@ -38,12 +38,7 @@ class Produto_Controller extends Controller
 				"valor_produto",
 				"imagem_produto")->get();
 
-
-
-
 			return view("consult.consultar_produtos_cliente", compact("produto"));
-
-
 		}
 
 	/*
@@ -81,10 +76,6 @@ class Produto_Controller extends Controller
         	}
 		}
 
-
-
-
-
 	/*
 	|----------------------------------------------------------------------
 	| CARRINHO
@@ -93,10 +84,8 @@ class Produto_Controller extends Controller
 
 		public function adicionar_ao_carrinho(Request $request)
 		{
-
-
 			$carrinho = session('carrinho', []);
-
+			#input_valor_produto
 			$isset_produto=false;
 
 			foreach ($carrinho as &$item)
@@ -104,6 +93,7 @@ class Produto_Controller extends Controller
 			    if ($item['id'] === $request->input_id_produto)
 			    {
 			        $item['quantidade'] += 1; // Atualiza a quantidade
+			        $item['valor_total']=$item['quantidade']*intval($request->input_valor_produto);
 			        $isset_produto = true;
 			        break;
 			    }
@@ -115,31 +105,16 @@ class Produto_Controller extends Controller
 				$carrinho[] =
 				[
 			        'id' => $request->input_id_produto,
-			        'quantidade' => 1
+			        'quantidade' => 1,
+			        'valor_total'=>intval($request->input_valor_produto),
+			        'nome_produto'=>$request->input_nome_produto
 			    ];
 			}
 			session()->put('carrinho', $carrinho);
 
 			return back();
 
-			
-			/*
-			$carrinho = session('carrinho', []);
-			foreach ($carrinho as $key => $value)
-			{
-				foreach ($value as $key_value => $value_value)
-				{
-					if($key_value=="id")
-					{
-						echo "<br><br>ID do produto:$value_value";
-					}
-					if($key_value=="quantidade")
-					{
-						echo "<br>Quantidade:$value_value";
-					}
-				}
-			}
-			*/
+
 
 		}
 
@@ -147,6 +122,37 @@ class Produto_Controller extends Controller
 		{
 			session()->forget('carrinho');
 			return back();
+		}
+
+		public function mostrar_carrinho()
+		{
+			$carrinho = session('carrinho', []);
+
+			$quantidade_total=0;
+			$valor_total=0;
+
+			foreach ($carrinho as $exibir_carrinho => $item_carrinho)
+			{
+				foreach ($item_carrinho as $key => $value)
+				{
+
+					if($key=="quantidade")
+					{
+						#echo "<br>Quantidade:$value";
+						$quantidade_total+=$value;
+					}
+					if($key=="valor_total")
+					{
+						#echo "<br>Valor total:$value";
+						$valor_total+=$value;
+					}
+				}
+			}
+			
+
+			return view("consult.consultar_carrinho", compact(
+				"carrinho", "quantidade_total", "valor_total"));
+
 		}
 
 	/*

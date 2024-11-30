@@ -39,6 +39,10 @@
         width: auto;
         object-fit: cover; /* Ajusta a imagem para caber sem distorção */
     }
+    .margin-20
+    {
+        margin-top: 20px;
+    }
 
 </style>
 
@@ -51,7 +55,7 @@
 
 	<ul>
     	<li><a href="Consultar Produtos" class="mymenu" title="Home">Produtos</a></li>
-    	<li><a href="Atualizar Dados" class="mymenu" title="Sobre">Cadastrar em endereço</a></li>
+    	<li><a href="Atualizar Dados" class="mymenu" title="Sobre">Cadastrar Endereço</a></li>
     	<li><a href="Suporte" class="mymenu" title="Portfolio">Suporte</a></li>
     	<li><a href="Apagar Carrinho" class="mymenu" title="Contato">Apagar Carrinho</a></li>
         <li><a href="Ver Carrinho" class="mymenu" title="Contato">Ver Carrinho</a></li>

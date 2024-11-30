@@ -21,8 +21,15 @@
 						<div class="card-body">
 							<h5 class="card-title">{{$exibir_produto->nome_produto}}</h5>
 							<p class="card-text">R$ {{$exibir_produto->valor_produto}}</p>
+
 							<input type="hidden" name="input_id_produto"
 							value="{{ $exibir_produto->id_produto }}">
+
+							<input type="hidden" name="input_valor_produto"
+							value="{{ $exibir_produto->valor_produto }}">
+
+							<input type="hidden" name="input_nome_produto"
+							value="{{ $exibir_produto->nome_produto }}">
 							<button  type="submit"class="btn btn-secondary btn-block mb-4">
 								Adicionar ao carrinho!
 	  						</button>

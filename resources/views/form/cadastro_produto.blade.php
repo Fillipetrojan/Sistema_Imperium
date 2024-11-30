@@ -15,13 +15,13 @@
 			
 			>Nome</span>
 			<input type="text" class="form-control"
-			name="input_nome_produto"
+			name="input_nome_produto" required 
 			placeholder="Nome do produto" aria-label="Username" aria-describedby="basic-addon1">
 		</div>
 
 		<div class="input-group mb-3">
 			<span class="input-group-text"
-			id="basic-addon2"
+			id="basic-addon2" required
 			>Valor R$</span>
 			<input type="number" step="0.01" class="form-control"
 			name="input_valor_produto"

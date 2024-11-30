@@ -94,6 +94,8 @@ use App\Http\Controllers\Produto_Controller;
 		{
 
 			Route::get("Cliente/Apagar Carrinho", [Produto_Controller::class, "apagar_carrinho"]);
+
+			Route::get("Cliente/Ver Carrinho", [Produto_Controller::class, "mostrar_carrinho"]);
 		});
 
 /*

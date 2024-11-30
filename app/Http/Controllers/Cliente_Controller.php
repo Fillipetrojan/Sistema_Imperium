@@ -17,7 +17,34 @@ class Cliente_Controller extends Controller
 {
 
 
+	function validaCPF($cpf)
+	{
+ 
+    	// Extrai somente os números
+	    $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
+	     
+	    // Verifica se foi informado todos os digitos corretamente
+	    if (strlen($cpf) != 11) {
+	        return false;
+	    }
 
+	    // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
+	    if (preg_match('/(\d)\1{10}/', $cpf)) {
+	        return false;
+	    }
+
+	    // Faz o calculo para validar o CPF
+	    for ($t = 9; $t < 11; $t++) {
+	        for ($d = 0, $c = 0; $c < $t; $c++) {
+	            $d += $cpf[$c] * (($t + 1) - $c);
+	        }
+	        $d = ((10 * $d) % 11) % 10;
+	        if ($cpf[$c] != $d) {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
 
 
 	/*
@@ -70,8 +97,6 @@ class Cliente_Controller extends Controller
 	        }
 		}
 
-
-
 		public function logout(Request $request)
     	{
 	        Auth::logout();
@@ -94,6 +119,15 @@ class Cliente_Controller extends Controller
         		// Cliente
 		        $cliente->nome_cliente=$request->input_nome_cliente;
 		        $cliente->CPF_cliente=$request->input_CPF_cliente;
+
+		        $valida_CPF=$this->validaCPF($request->input_CPF_cliente);
+		        if(!$valida_CPF)
+	        	{
+	        		DB::rollBack();
+	        		return back();
+
+	        	}
+
 		        $cliente->sexo_cliente=$request->input_sexo_cliente;
 		        $cliente->nascimento_cliente=$request->input_nascimento_cliente;
 		        $senha_cliente_cry=Hash::make($request->input_password_cliente);

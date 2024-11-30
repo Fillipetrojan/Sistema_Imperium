@@ -19,26 +19,24 @@
 
 <div>
 
-
   <form action="Cadastrar Cliente" method="POST">
   @csrf
   <div data-mdb-input-init class="form-outline mb-4">
-      <input type="text" name="input_nome_cliente"
+      <input type="text" name="input_nome_cliente" required 
       placeholder="Marcos Vinicius Ruan Elias Ferreira" 
       id="id_nome_cliente" class="form-control" />
       <label class="form-label" for="id_nome_cliente">Nome Completo</label>
     </div>
 
     <div data-mdb-input-init class="form-outline mb-4">
-      <input type="email" name="input_email_cliente"
-      placeholder="Cliente@email.com" 
+      <input type="email" name="input_email_cliente" required
+      placeholder="Cliente@email.com"
       id="id_email_cliente" class="form-control" />
       <label class="form-label" for="id_email_cliente">Email</label>
     </div>
 
-
     <div data-mdb-input-init class="form-outline mb-4">
-      <input type="password" name="input_password_cliente"
+      <input type="password" name="input_password_cliente" required 
       id="id_senha_cliente" class="form-control" />
       <label class="form-label" for="id_senha_cliente">Senha</label>
     </div>
@@ -50,18 +48,17 @@
     </div>
 
     <div data-mdb-input-init class="form-outline mb-4">
-      <input type="text" name="input_CPF_cliente" 
+      <input type="text" name="input_CPF_cliente" required 
+      minlength="11"  maxlength="11" required
       id="id_CPF_cliente" class="form-control"/>
       <label class="form-label" for="id_CPF_cliente">CPF</label>
     </div>
 
-
     <div data-mdb-input-init class="form-outline mb-4">
-      <input type="date" name="input_nascimento_cliente" 
+      <input type="date" name="input_nascimento_cliente" required 
       id="id_nascimento_cliente" class="form-control" />
       <label class="form-label" for="id_nascimento">Data de nascimento</label>
     </div>
-
 
   <div class="form-check">
     <input class="form-check-input"
@@ -80,29 +77,21 @@
     </label>
   </div>
 
-
-
-
-
-
   <h4>Endereço</h4>
 
   <div data-mdb-input-init class="form-outline mb-4">
-      <input type="text" name="input_nome_rua"
+      <input type="text" name="input_nome_rua" required 
       placeholder="Rua..." 
       id="id_nome_rua" class="form-control" />
       <label class="form-label" for="id_nome_rua">Nome da Rua</label>
     </div>
 
-
   <div data-mdb-input-init class="form-outline mb-4">
-      <input type="text" name="input_numero_rua"
+      <input type="text" name="input_numero_rua" required 
       placeholder="000" 
       id="id_numero_rua" class="form-control" />
       <label class="form-label" for="id_numero_rua">Numero da Rua</label>
     </div>
-
-
 
   <div data-mdb-input-init class="form-outline mb-4">
       <input type="text" name="input_complemento"
@@ -111,18 +100,16 @@
       <label class="form-label" for="id_complemento">Complemento (opcional)</label>
     </div>
 
-
-
   <div data-mdb-input-init class="form-outline mb-4">
-      <input type="text" name="input_CEP"
+      <input type="text" name="input_CEP" required
+      maxlength="8" minlength="8"
       placeholder="00000000" 
       id="id_CEP" class="form-control" />
       <label class="form-label" for="id_CEP">CEP</label>
     </div>
 
-
   <div data-mdb-input-init class="form-outline mb-4">
-      <input type="text" name="input_bairro"
+      <input type="text" name="input_bairro" required 
       placeholder="Nome do Bairro" 
       id="id_bairro" class="form-control" />
       <label class="form-label" for="id_bairro">Bairro</label>
@@ -130,7 +117,7 @@
 
 
   <div data-mdb-input-init class="form-outline mb-4">
-      <input type="text" name="input_cidade"
+      <input type="text" name="input_cidade" required 
       placeholder="Belo Horizonte" value="Belo Horizonte" 
       id="id_cidade" class="form-control" />
       <label class="form-label" for="id_cidade">Cidade</label>
@@ -139,7 +126,7 @@
 
   <div data-mdb-input-init class="form-outline mb-4">
       <input type="text" name="input_estado"
-      placeholder="MG" value="MG" 
+      placeholder="MG" value="MG" maxlength="2" 
       id="id_estado" class="form-control" />
       <label class="form-label" for="id_estado">Estado</label>
     </div>
@@ -148,7 +135,7 @@
   <h4>Contato</h4>
 
   <div data-mdb-input-init class="form-outline mb-4">
-      <input type="text" name="input_DDD"
+      <input type="text" name="input_DDD" maxlength="2" minlength="2" 
       placeholder="00"
       id="id_DDD" class="form-control" />
       <label class="form-label" for="id_DDD">DDD</label>
