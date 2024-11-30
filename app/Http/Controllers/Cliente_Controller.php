@@ -12,10 +12,8 @@ use App\Models\Contato;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
-
 class Cliente_Controller extends Controller
 {
-
 
 	function validaCPF($cpf)
 	{
@@ -45,7 +43,6 @@ class Cliente_Controller extends Controller
 	    }
 	    return true;
 	}
-
 
 	/*
 	|----------------------------------------------------------------------

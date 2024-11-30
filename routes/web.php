@@ -65,6 +65,8 @@ use App\Http\Controllers\Produto_Controller;
 			Route::get("Funcionario/Cadastro Produto", [Produto_Controller::class, "form_cadastro_produto"]);
 
 			Route::get("Funcionario/Logout", [Funcionario_Controller::class, "logout"]);
+
+			Route::get("Funcionario/Consultar Vendas", [Produto_Controller::class, "consultar_vendas"]);
 		});
 
 	/*

@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 
 use App\Models\Endereco;
 use App\Models\Contato;
+use App\Models\Venda;
 
 class Cliente extends Authenticatable
 {
@@ -52,7 +53,12 @@ class Cliente extends Authenticatable
 
     public function contato()
     {
-        return $this->hasMany(Endereco::class, "id_dono");
+        return $this->hasMany(Contato::class, "id_dono");
+    }
+
+    public function venda()
+    {
+        return $this->hasMany(Venda::class, "id_cliente");
     }
 
 

@@ -17,4 +17,12 @@ class Produto extends Model
     	"id_tipo_produto",
     	"imagem_produto"
     ];
+
+    public function venda()
+    {
+        return $this->belongsToMany(Venda::class,
+        'produto_venda', 'id_produto', 'id_venda')
+        ->withPivot('quantidade', 'valor'); // Adiciona as colunas extras da tabela intermediária, se necessário.
+    }
+
 }

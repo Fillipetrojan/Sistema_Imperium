@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\Estoque;
 use App\Models\Venda;
+use App\Models\Cliente;
 use App\Models\Produto_Venda;
 use Carbon\Carbon;
 
@@ -31,8 +32,7 @@ class Produto_Controller extends Controller
 	| SELECT
 	|----------------------------------------------------------------------
 	*/
-
-
+	
 		public function cliente_consultar_produtos()
 		{
 			$produto=Produto::select(
@@ -42,6 +42,33 @@ class Produto_Controller extends Controller
 				"imagem_produto")->get();
 
 			return view("consult.consultar_produtos_cliente", compact("produto"));
+		}
+
+		public function consultar_vendas()
+		{
+
+			#->join("cargo", "funcionario.id_cargo", "=", "cargo.id_cargo")
+			$cliente=Cliente::select(
+				"cliente.id_cliente as id_cliente",
+				"nome_cliente",
+				"CPF_cliente",
+				"email_cliente")
+			/*
+			->join("venda", "venda.id_cliente", "=", "cliente.id_cliente")
+			->join("produto_venda", "produto_venda.id_venda", "=", "venda.id_venda")
+			->join("produto", "produto_venda.id_produto", "=", "produto.id_produto")
+			->join("endereco", "endereco.id_dono", "=", "cliente.id_cliente")
+			->join("contato", "contato.id_dono", "=", "cliente.id_cliente")
+			*/
+			->with([
+				"venda.produto",
+				"endereco",
+				"contato"])
+			->whereHas('venda')
+			->get();
+
+
+			return view("consult.consultar_vendas", compact("cliente"));
 		}
 
 	/*
@@ -79,7 +106,6 @@ class Produto_Controller extends Controller
         	}
 		}
 
-
 		public function fazer_compra(Request $request, Produto $produto, Venda $venda)
 		{
 			$carrinho = session('carrinho', []);
@@ -98,12 +124,7 @@ class Produto_Controller extends Controller
 				
 				foreach ($carrinho as $exibir_carrinho)
 				{
-					/*
-					echo "<br><br>ID produto:". $exibir_carrinho['id'];
-					echo "<br>Quantidade". $exibir_carrinho['quantidade'];
-					echo "<br>Valor Total". $exibir_carrinho['valor_total'];
-					*/
-				
+
 					Produto_Venda::create([
 					"id_venda"=>$id_venda,
 					"id_produto"=>$exibir_carrinho['id'],
@@ -116,9 +137,6 @@ class Produto_Controller extends Controller
 					$venda->valor_venda=$valor_total;
 					$venda->numero_produtos=$quantidade_total;
 					$venda->save();
-
-
-
 
 				}// foreach ($carrinho as $exibir_carrinho => $item_carrinho)
 

@@ -17,4 +17,14 @@ class Venda extends Model
     	"numero_produtos",
     	"data"
     ];
+
+
+
+    public function produto()
+    {
+        return $this->belongsToMany(Produto::class,
+        'produto_venda', 'id_venda', 'id_produto')
+        ->withPivot('numero_produto', 'valor_produto')
+        ->select(['produto.id_produto as id_produto','nome_produto']); 
+    }
 }
