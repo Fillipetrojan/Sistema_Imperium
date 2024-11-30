@@ -106,7 +106,14 @@ class Cliente_Controller extends Controller
 	|----------------------------------------------------------------------
 	*/
 		public function cadastrar_cliente(Cliente $cliente, Endereco $endereco, Contato $contato, Request $request)
-        {	
+        {
+        	$request->validate([
+        	"input_nome_cliente"=>"required",
+        	"input_CPF_cliente"=>"required|min:11|max:11",
+        	"input_estado"=>"required|min:2|max:2",
+        	"input_DDD"=>"required|min:2|max:2",
+        	"input_CEP"=>"min:8|max:8"
+			]);
 
         	DB::beginTransaction();
         	try
@@ -131,7 +138,6 @@ class Cliente_Controller extends Controller
 		        $cliente->password=$senha_cliente_cry;
 		        $cliente->save();
 		        $id_cliente=$cliente->id_cliente;
-
 
 		        //Endereço
 		        $endereco->id_dono=$id_cliente;

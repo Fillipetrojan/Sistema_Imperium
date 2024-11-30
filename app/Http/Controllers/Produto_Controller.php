@@ -46,27 +46,17 @@ class Produto_Controller extends Controller
 
 		public function consultar_vendas()
 		{
-
-			#->join("cargo", "funcionario.id_cargo", "=", "cargo.id_cargo")
 			$cliente=Cliente::select(
 				"cliente.id_cliente as id_cliente",
 				"nome_cliente",
 				"CPF_cliente",
 				"email_cliente")
-			/*
-			->join("venda", "venda.id_cliente", "=", "cliente.id_cliente")
-			->join("produto_venda", "produto_venda.id_venda", "=", "venda.id_venda")
-			->join("produto", "produto_venda.id_produto", "=", "produto.id_produto")
-			->join("endereco", "endereco.id_dono", "=", "cliente.id_cliente")
-			->join("contato", "contato.id_dono", "=", "cliente.id_cliente")
-			*/
 			->with([
 				"venda.produto",
 				"endereco",
 				"contato"])
 			->whereHas('venda')
 			->get();
-
 
 			return view("consult.consultar_vendas", compact("cliente"));
 		}
@@ -79,16 +69,17 @@ class Produto_Controller extends Controller
 
 		public function cadastrar_produto(Request $request, Produto $produto, Estoque $estoque)
 		{
-
+			$request->validate([
+        	"input_nome_produto"=>"required",
+        	"input_valor_produto"=>'required|regex:/^\d+(\.\d{1,2})?$/',
+        	"input_imagem_produto"=>'required|mimes:jpg,jpeg,png'
+			]);
 			DB::beginTransaction();
         	try
         	{
-
         		$produto->nome_produto=$request->input_nome_produto;
         		$produto->valor_produto=$request->input_valor_produto;
         		$produto->imagem_produto=file_get_contents($request->file("input_imagem_produto"));
-        		#$imagem=$request->file("input_imagem_produto");
-
         		$produto->save();
 
         		$estoque->id_produto=$produto->id_produto;
@@ -115,7 +106,6 @@ class Produto_Controller extends Controller
 			DB::beginTransaction();
 			try
 			{
-
 				$id_usuario=session("usuario_id");
 				$venda->id_cliente=$id_usuario;
 				$venda->data=Carbon::now();
@@ -143,21 +133,14 @@ class Produto_Controller extends Controller
 
 				DB::commit();
 				session()->forget('carrinho');
-
-			
 			}catch (\Exception $e)
             {
-        
         		DB::rollBack();
         		session()->forget('carrinho');
         		return response()->json(
         			['error' => 'Erro ao fazer compra' . $e->getMessage()], 500
         		);
-
-
         	}
-
-
 		}// public function fazer_compra
 
 	/*
@@ -165,11 +148,9 @@ class Produto_Controller extends Controller
 	| CARRINHO
 	|----------------------------------------------------------------------
 	*/
-
 		public function adicionar_ao_carrinho(Request $request)
 		{
 			$carrinho = session('carrinho', []);
-			#input_valor_produto
 			$isset_produto=false;
 
 			foreach ($carrinho as &$item)
@@ -182,7 +163,6 @@ class Produto_Controller extends Controller
 			        break;
 			    }
 			}
-
 
 			if(!$isset_produto)
 			{
@@ -197,9 +177,6 @@ class Produto_Controller extends Controller
 			session()->put('carrinho', $carrinho);
 
 			return back();
-
-
-
 		}
 
 		public function apagar_carrinho()
@@ -219,24 +196,18 @@ class Produto_Controller extends Controller
 			{
 				foreach ($item_carrinho as $key => $value)
 				{
-
 					if($key=="quantidade")
 					{
-						#echo "<br>Quantidade:$value";
 						$quantidade_total+=$value;
 					}
 					if($key=="valor_total")
 					{
-						#echo "<br>Valor total:$value";
 						$valor_total+=$value;
 					}
 				}
 			}
-			
-
 			return view("consult.consultar_carrinho", compact(
 				"carrinho", "quantidade_total", "valor_total"));
-
 		}
 
 	/*

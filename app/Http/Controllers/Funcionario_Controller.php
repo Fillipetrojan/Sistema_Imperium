@@ -46,12 +46,6 @@ class Funcionario_Controller extends Controller
 
 	}
 
-
-
-
-
-
-
 	/*
 	|----------------------------------------------------------------------
 	| FORM
@@ -69,6 +63,14 @@ class Funcionario_Controller extends Controller
 		public function cadastrar_funcionario(Funcionario $funcionario,
 			Endereco $endereco, Contato $contato, Request $request)
         {
+
+        	$request->validate([
+        	"input_nome_funcionario"=>"required",
+        	"input_CPF_funcionario"=>"required|min:11|max:11",
+        	"input_estado"=>"required|min:2|max:2",
+        	"input_DDD"=>"required|min:2|max:2",
+        	"input_CEP"=>"min:8|max:8"
+			]);
 
         	DB::beginTransaction();
         	try
