@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 class Funcionario_Controller extends Controller
 {
 
-
 	function validaCPF($cpf)
 	{
  
@@ -26,12 +25,10 @@ class Funcionario_Controller extends Controller
 	    if (strlen($cpf) != 11) {
 	        return false;
 	    }
-
 	    // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
 	    if (preg_match('/(\d)\1{10}/', $cpf)) {
 	        return false;
 	    }
-
 	    // Faz o calculo para validar o CPF
 	    for ($t = 9; $t < 11; $t++) {
 	        for ($d = 0, $c = 0; $c < $t; $c++) {
@@ -43,7 +40,6 @@ class Funcionario_Controller extends Controller
 	        }
 	    }
 	    return true;
-
 	}
 
 	/*
@@ -75,25 +71,24 @@ class Funcionario_Controller extends Controller
         	DB::beginTransaction();
         	try
         	{
-	        	$funcionario->nome_funcionario=$request->input_nome_funcionario;
-	        	$funcionario->CPF_funcionario=$request->input_CPF_funcionario;
-
+	        	//Valida CPF
 	        	$valida_CPF=$this->validaCPF($request->input_CPF_funcionario);
-
-	        	if(!$valida_CPF)
+				if(!$valida_CPF)
 	        	{
 	        		DB::rollBack();
 	        		return back();
-
 	        	}
-
+	        	$funcionario->CPF_funcionario=$request->input_CPF_funcionario;
+	        	$funcionario->nome_funcionario=$request->input_nome_funcionario;
 	        	$funcionario->sexo_funcionario=$request->input_sexo_funcionario;
 	        	$funcionario->nascimento_funcionario=$request->input_nascimento;
 	        	$funcionario->email_funcionario=$request->input_email_funcionario;
 
+	        	//Criptografa a senha
 	        	$senha_funcionario_cry=Hash::make($request->input_password_funcionario);
 	        	$funcionario->password=$senha_funcionario_cry;
 
+	        	//Cria o funcionário e paga seu ID
 	        	$funcionario->save();
 	        	$id_funcionario=$funcionario->id_funcionario;
 
@@ -160,7 +155,6 @@ class Funcionario_Controller extends Controller
 		    }
 		}
 
-
 		public function logout(Request $request)
     	{
 	        Auth::logout();
@@ -168,14 +162,9 @@ class Funcionario_Controller extends Controller
 
 	        return redirect('Login Funcionario');
     	}
-
-
-
 	/*
 	|----------------------------------------------------------------------
 	| UPDATE
 	|----------------------------------------------------------------------
 	*/
-
-
 }

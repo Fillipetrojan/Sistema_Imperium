@@ -4,16 +4,15 @@
 
 @section('content')
 
-
 <div class="input_margin">
 
 	<form action="Cadastrar Produto" method="post" enctype="multipart/form-data">
 		@csrf
 		<div class="input-group mb-3">
 			<span class="input-group-text"
-			id="basic-addon1"
-			
-			>Nome</span>
+			id="basic-addon1">
+				Nome
+			</span>
 			<input type="text" class="form-control"
 			name="input_nome_produto" required 
 			placeholder="Nome do produto" aria-label="Username" aria-describedby="basic-addon1">
@@ -21,18 +20,19 @@
 
 		<div class="input-group mb-3">
 			<span class="input-group-text"
-			id="basic-addon2" required
-			>Valor R$</span>
+			id="basic-addon2" required>
+				Valor R$
+			</span>
 			<input type="number" step="0.01" class="form-control"
 			name="input_valor_produto"
 			placeholder="00.00" aria-label="Username" aria-describedby="basic-addon1">
 		</div>
 
-
 		<div class="input-group mb-3">
 			<span class="input-group-text"
-			id="basic-addon2"
-			>Foto do produto</span>
+			id="basic-addon2">
+				Foto do produto
+			</span>
 			<input type="file" class="form-control"
 			name="input_imagem_produto"
 			aria-label="Username" aria-describedby="basic-addon1"
@@ -44,10 +44,7 @@
 	    class="btn btn-secondary">
 	    	Cadastrar
 		</button>
-
 	</form>
 </div>
-
-
 
 @endsection

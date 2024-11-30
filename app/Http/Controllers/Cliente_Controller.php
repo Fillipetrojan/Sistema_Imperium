@@ -14,10 +14,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Cliente_Controller extends Controller
 {
-
 	function validaCPF($cpf)
 	{
- 
     	// Extrai somente os números
 	    $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
 	     
@@ -68,17 +66,13 @@ class Cliente_Controller extends Controller
 
 		public function fazer_login(Request $request)
 		{
-
 			$email_cliente=$request->input_email_cliente;
-
         	$senha_cliente=$request->input_senha_cliente;
 
 			if (Auth::guard('cliente')->
 				attempt(['email_cliente' => $email_cliente, "password" => $senha_cliente]))
 	        {
 	            $request->session()->regenerate();
-
-	            
 
 	            $usuario = Cliente::where('email_cliente', $email_cliente)
 	                        ->first();
@@ -118,19 +112,17 @@ class Cliente_Controller extends Controller
         	DB::beginTransaction();
         	try
         	{
-
-        		// Cliente
-		        $cliente->nome_cliente=$request->input_nome_cliente;
-		        $cliente->CPF_cliente=$request->input_CPF_cliente;
-
+		        //Validar CPF
 		        $valida_CPF=$this->validaCPF($request->input_CPF_cliente);
 		        if(!$valida_CPF)
 	        	{
 	        		DB::rollBack();
 	        		return back();
-
 	        	}
 
+	        	// Cliente
+		        $cliente->nome_cliente=$request->input_nome_cliente;
+		        $cliente->CPF_cliente=$request->input_CPF_cliente;
 		        $cliente->sexo_cliente=$request->input_sexo_cliente;
 		        $cliente->nascimento_cliente=$request->input_nascimento_cliente;
 		        $senha_cliente_cry=Hash::make($request->input_password_cliente);
@@ -161,7 +153,6 @@ class Cliente_Controller extends Controller
 
             }catch (\Exception $e)
             {
-        
         		DB::rollBack();
         		return response()->json(
         			['error' => 'Erro ao criar cliente' . $e->getMessage()], 500
@@ -169,8 +160,6 @@ class Cliente_Controller extends Controller
         	}
 
         }//public function cadastrar_cliente
-
-
     /*
 	|----------------------------------------------------------------------
 	| CONSULT

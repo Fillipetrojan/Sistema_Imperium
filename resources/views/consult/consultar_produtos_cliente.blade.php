@@ -6,12 +6,7 @@
 
 <div class="container mt-4">
 	<div class="row">
-
-
 		@foreach($produto as $exibir_produto)
-
-			
-			
 			<div class="col-md-4 mb-4">
 				<form action="Adicionar Ao Carrinho" method="POST">
 				@csrf

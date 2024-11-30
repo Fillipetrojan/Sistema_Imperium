@@ -33,23 +33,20 @@ class Cliente extends Authenticatable
     ];
 
     protected $hidden = ['password'];
-
-
+    
     protected static function boot()
     {
-    parent::boot();
+        parent::boot();
 
-    static::creating(function ($model) {
-        $model->id_cliente = (string) \Illuminate\Support\Str::uuid();
-        #dd($model->id_cliente); // Verifique se o UUID está sendo gerado aqui
-        });
+        static::creating(function ($model) {
+            $model->id_cliente = (string) \Illuminate\Support\Str::uuid();
+            });
     }
 
     public function endereco()
     {
         return $this->hasMany(Endereco::class, "id_dono");
     }
-
 
     public function contato()
     {
@@ -60,6 +57,5 @@ class Cliente extends Authenticatable
     {
         return $this->hasMany(Venda::class, "id_cliente");
     }
-
 
 }

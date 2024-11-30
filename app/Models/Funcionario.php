@@ -28,8 +28,7 @@ class Funcionario extends Authenticatable
     ];
 
     protected $hidden = ['password', 'remember_token'];
-
-
+    
     protected static function boot()
     {
         parent::boot();
@@ -37,11 +36,4 @@ class Funcionario extends Authenticatable
             $model->id_funcionario = (string) \Illuminate\Support\Str::uuid(); // Gera UUID automaticamente
         });
     }
-
-    /*
-    public function tarefa()
-    {
-        return $this->hasMany(Tarefa::class, "id_funcionario");
-    }
-    */
 }

@@ -17,9 +17,7 @@ class Venda extends Model
     	"numero_produtos",
     	"data"
     ];
-
-
-
+    
     public function produto()
     {
         return $this->belongsToMany(Produto::class,

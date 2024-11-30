@@ -21,18 +21,15 @@ class Produto_Controller extends Controller
 	| FORM
 	|----------------------------------------------------------------------
 	*/
-
 		public function form_cadastro_produto()
 		{
 			return view("form.cadastro_produto");
 		}
-
 	/*
 	|----------------------------------------------------------------------
 	| SELECT
 	|----------------------------------------------------------------------
 	*/
-	
 		public function cliente_consultar_produtos()
 		{
 			$produto=Produto::select(
