@@ -14,4 +14,6 @@
 		</div>
 	@endforeach
 
+	<a class="btn btn-dark" href="Fazer Compra" role="button">Fazer Compra</a>
+
 @endsection

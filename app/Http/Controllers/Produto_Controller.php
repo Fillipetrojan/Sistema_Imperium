@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Produto;
 use App\Models\Estoque;
+use App\Models\Venda;
+use App\Models\Produto_Venda;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
 
@@ -75,6 +78,69 @@ class Produto_Controller extends Controller
         		);
         	}
 		}
+
+
+		public function fazer_compra(Request $request, Produto $produto, Venda $venda)
+		{
+			$carrinho = session('carrinho', []);
+
+			$quantidade_total=0;
+			$valor_total=0;
+			DB::beginTransaction();
+			try
+			{
+
+				$id_usuario=session("usuario_id");
+				$venda->id_cliente=$id_usuario;
+				$venda->data=Carbon::now();
+				$venda->save();
+				$id_venda = $venda->id_venda;
+				
+				foreach ($carrinho as $exibir_carrinho)
+				{
+					/*
+					echo "<br><br>ID produto:". $exibir_carrinho['id'];
+					echo "<br>Quantidade". $exibir_carrinho['quantidade'];
+					echo "<br>Valor Total". $exibir_carrinho['valor_total'];
+					*/
+				
+					Produto_Venda::create([
+					"id_venda"=>$id_venda,
+					"id_produto"=>$exibir_carrinho['id'],
+					"numero_produto"=>$exibir_carrinho['quantidade'],
+					"valor_produto"=>$exibir_carrinho['valor_total']
+					]);
+
+					$quantidade_total+=$exibir_carrinho['quantidade'];
+					$valor_total+=$exibir_carrinho['valor_total'];
+					$venda->valor_venda=$valor_total;
+					$venda->numero_produtos=$quantidade_total;
+					$venda->save();
+
+
+
+
+				}// foreach ($carrinho as $exibir_carrinho => $item_carrinho)
+
+
+				DB::commit();
+				session()->forget('carrinho');
+
+			
+			}catch (\Exception $e)
+            {
+        
+        		DB::rollBack();
+        		session()->forget('carrinho');
+        		return response()->json(
+        			['error' => 'Erro ao fazer compra' . $e->getMessage()], 500
+        		);
+
+
+        	}
+
+
+		}// public function fazer_compra
 
 	/*
 	|----------------------------------------------------------------------

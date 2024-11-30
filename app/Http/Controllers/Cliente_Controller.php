@@ -72,7 +72,7 @@ class Cliente_Controller extends Controller
 		public function fazer_login(Request $request)
 		{
 
-			$email_cliente = $request->input_email_cliente;
+			$email_cliente=$request->input_email_cliente;
 
         	$senha_cliente=$request->input_senha_cliente;
 
@@ -88,7 +88,6 @@ class Cliente_Controller extends Controller
 
 	            session(['usuario_id' => $usuario->id_cliente]);
 	            session(['usuario_email' => $usuario->email_cliente]);
-
 
 	            return redirect()->intended('Cliente/Consultar Produtos');
 	        }else
