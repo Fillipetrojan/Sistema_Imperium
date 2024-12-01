@@ -10,6 +10,7 @@ use App\Models\Estoque;
 use App\Models\Venda;
 use App\Models\Cliente;
 use App\Models\Produto_Venda;
+use App\Models\Tipo_Produto;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
@@ -25,20 +26,29 @@ class Produto_Controller extends Controller
 		{
 			return view("form.cadastro_produto");
 		}
+
+		public function form_cadastro_tipo_produto()
+		{
+			return view("form.cadastro_tipo_produto");
+		}
 	/*
 	|----------------------------------------------------------------------
 	| SELECT
 	|----------------------------------------------------------------------
 	*/
-		public function cliente_consultar_produtos()
+		public function cliente_consultar_produtos($id_tipo_produto=null)
 		{
+			
 			$produto=Produto::select(
 				"id_produto",
 				"nome_produto",
 				"valor_produto",
-				"imagem_produto")->get();
+				"imagem_produto")
+			->where('id_tipo_produto', $id_tipo_produto)
+			->get();
 
 			return view("consult.consultar_produtos_cliente", compact("produto"));
+		
 		}
 
 		public function consultar_vendas()
@@ -58,12 +68,12 @@ class Produto_Controller extends Controller
 			return view("consult.consultar_vendas", compact("cliente"));
 		}
 
+
 	/*
 	|----------------------------------------------------------------------
 	| INSERT
 	|----------------------------------------------------------------------
 	*/
-
 		public function cadastrar_produto(Request $request, Produto $produto, Estoque $estoque)
 		{
 			$request->validate([
@@ -86,7 +96,6 @@ class Produto_Controller extends Controller
 
         	}catch (\Exception $e)
             {
-        
         		DB::rollBack();
         		return response()->json(
         			['error' => 'Erro ao cadastrar produto' . $e->getMessage()], 500
@@ -127,7 +136,6 @@ class Produto_Controller extends Controller
 
 				}// foreach ($carrinho as $exibir_carrinho => $item_carrinho)
 
-
 				DB::commit();
 				session()->forget('carrinho');
 			}catch (\Exception $e)
@@ -140,6 +148,13 @@ class Produto_Controller extends Controller
         	}
 		}// public function fazer_compra
 
+
+		public function cadastrar_tipo_produto(Request $request, Tipo_Produto $tipo_produto)
+		{
+			$tipo_produto->nome_tipo_produto=$request->input_tipo_produto;
+			$tipo_produto->save();
+			return back();
+		}
 	/*
 	|----------------------------------------------------------------------
 	| CARRINHO

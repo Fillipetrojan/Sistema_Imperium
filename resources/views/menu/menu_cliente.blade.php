@@ -54,13 +54,37 @@
 <body>
 
 	<ul>
-    	<li><a href="Consultar Produtos" class="mymenu" title="Home">Produtos</a></li>
-    	<li><a href="Atualizar Dados" class="mymenu" title="Sobre">Cadastrar Endereço</a></li>
-    	<li><a href="Suporte" class="mymenu" title="Portfolio">Suporte</a></li>
-    	<li><a href="Apagar Carrinho" class="mymenu" title="Contato">Apagar Carrinho</a></li>
-        <li><a href="Ver Carrinho" class="mymenu" title="Contato">Ver Carrinho</a></li>
-        <li><a href="Logout" class="mymenu" title="Contato">Sair</a></li>
+    	<li><a href="{{url('Cliente/Consultar-Produtos')}}" class="mymenu" title="Home">Produtos</a></li>
+    	<li><a href="{{url('Cliente/Atualizar-Dados')}}" class="mymenu" title="Sobre">Cadastrar Endereço</a></li>
+    	<li><a href="{{url('Cliente/Suporte')}}" class="mymenu" title="Portfolio">Suporte</a></li>
+    	<li><a href="{{url('Cliente/Apagar-Carrinho')}}" class="mymenu" title="Contato">Apagar Carrinho</a></li>
+        <li><a href="{{url('Cliente/Ver-Carrinho')}}" class="mymenu" title="Contato">Ver Carrinho</a></li>
+        <li><a href="{{url('Cliente/Logout')}}" class="mymenu" title="Contato">Sair</a></li>
+
+        <li>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Produtos
+                </button>
+                <ul class="dropdown-menu">
+                    @foreach($tipo_produto as $exibir_tipo_produto)
+                        <li>
+                            <a class="dropdown-item"
+                            href="{{ url('Cliente/Consultar-Produtos') }}/{{$exibir_tipo_produto->id_tipo_produto}}">
+                                {{$exibir_tipo_produto->nome_tipo_produto}}
+                            </a>
+                        </li>
+                    @endforeach
+                    
+                </ul>
+            </div>
+        </li>
 	</ul>
+
+
      
 @yield('content')
 

@@ -63,9 +63,10 @@
 </head>
 <body>
 	<ul>
-    	<li><a href="Cadastro Produto" class="mymenu" title="Home">Cadastrar produto</a></li>
-    	<li><a href="Cadastro Endereco" class="mymenu" title="Sobre">Cadastrar um endereço</a></li>
-        <li><a href="Consultar Vendas" class="mymenu" title="Sobre">Consultar Vendas</a></li>
+    	<li><a href="{{url('Funcionario/Cadastro-Produto')}}" class="mymenu" title="Home">Cadastrar produto</a></li>
+        <li><a href="{{url('Funcionario/Cadastro-Tipo')}}" class="mymenu" title="Home">Cadastrar um Tipo</a></li>
+    	<li><a href="{{url('Funcionario/Cadastro-Endereco')}}" class="mymenu" title="Sobre">Cadastrar um endereço</a></li>
+        <li><a href="{{url('Funcionario/Consultar-Vendas')}}" class="mymenu" title="Sobre">Consultar Vendas</a></li>
         <li><a href="Logout" class="mymenu" title="Contato">Sair</a></li>
 	</ul>
 @yield('content')
