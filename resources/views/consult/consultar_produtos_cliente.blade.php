@@ -4,6 +4,8 @@
 
 @section('content')
 
+
+
 <div class="container mt-4">
 	<div class="row">
 		@foreach($produto as $exibir_produto)
@@ -32,11 +34,11 @@
 					</div>
 				</form>
 			</div>
-
-			
 		@endforeach
 
     </div>  
 </div>
+{{$produto->links()}}
+
 
 @endsection

@@ -38,15 +38,14 @@ class Produto_Controller extends Controller
 	*/
 		public function cliente_consultar_produtos($id_tipo_produto=null)
 		{
-			
-			$produto=Produto::select(
+			$query=Produto::select([
 				"id_produto",
 				"nome_produto",
 				"valor_produto",
-				"imagem_produto")
-			->where('id_tipo_produto', $id_tipo_produto)
-			->get();
-
+				"imagem_produto"]);
+			if(!is_null($id_tipo_produto)) $query->where('id_tipo_produto', $id_tipo_produto);
+		
+			$produto=$query->paginate(5);
 			return view("consult.consultar_produtos_cliente", compact("produto"));
 		
 		}

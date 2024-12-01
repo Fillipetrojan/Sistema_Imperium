@@ -3,7 +3,7 @@
 @section('title', 'IMPERIUM')
 
 @section('content')
-
+<div class="margin-left">
 	@foreach($cliente as $exibir_cliente)
 
 		<div class="card margin_top width border border-secondary">
@@ -50,5 +50,5 @@
 			</div>
 		</div>
 	@endforeach
-
+</div>
 @endsection

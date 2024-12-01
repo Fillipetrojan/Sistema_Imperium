@@ -32,7 +32,7 @@ use App\Http\Controllers\Produto_Controller;
 	| FUNCIONARIO
 	|----------------------------------------------------------------------
 	*/
-		Route::get("/Login Funcionario", [Funcionario_Controller::class, 'view_login']);
+		Route::get("/Login-Funcionario", [Funcionario_Controller::class, 'view_login']);
 		Route::post("Fazer login Funcionario", [Funcionario_Controller::class, "fazer_login"]);
 	/*
 	|----------------------------------------------------------------------
@@ -40,7 +40,7 @@ use App\Http\Controllers\Produto_Controller;
 	|----------------------------------------------------------------------
 	*/
 		Route::get("/", [Cliente_Controller::class, 'view_login']);
-		Route::get("/Login-Cliente", [Cliente_Controller::class, 'view_login']);
+		Route::get("Login-Cliente", [Cliente_Controller::class, 'view_login']);
 		Route::post("Fazer login Cliente", [Cliente_Controller::class, "fazer_login"]);
 /*
 |--------------------------------------------------------------------------

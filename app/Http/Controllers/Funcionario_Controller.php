@@ -148,7 +148,7 @@ class Funcionario_Controller extends Controller
 
 		        session(['usuario_id' => $usuario->id_funcionario]);
 		        session(['usuario_email' => $usuario->email_funcionario]);
-		        return redirect()->intended('Funcionario/Cadastro Produto');
+		        return redirect()->intended('Funcionario/Cadastro-Produto');
 		    }else
 		    {
 		        return back();
@@ -160,7 +160,7 @@ class Funcionario_Controller extends Controller
 	        Auth::logout();
 	        $request->session()->invalidate();
 
-	        return redirect('Login Funcionario');
+	        return redirect('Login-Funcionario');
     	}
 	/*
 	|----------------------------------------------------------------------

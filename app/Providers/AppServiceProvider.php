@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Pagination\Paginator;
 
 use App\Models\Tipo_Produto;
 
@@ -22,7 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //Bootstrap
+        Paginator::useBootstrapFive();
 
         //Menu Cliente
         View::composer("menu.menu_cliente", function ($view)
