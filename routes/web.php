@@ -8,6 +8,7 @@ use App\Http\Controllers\Usuario_Controller;
 use App\Http\Controllers\Cliente_Controller;
 use App\Http\Controllers\Endereco_Controller;
 use App\Http\Controllers\Produto_Controller;
+use App\Http\Controllers\Visitante_Controller;
 
 
 /*
@@ -32,14 +33,14 @@ use App\Http\Controllers\Produto_Controller;
 	| FUNCIONARIO
 	|----------------------------------------------------------------------
 	*/
-		Route::get("/Login-Funcionario", [Funcionario_Controller::class, 'view_login']);
+		Route::get("Login-Funcionario", [Funcionario_Controller::class, 'view_login']);
 		Route::post("Fazer login Funcionario", [Funcionario_Controller::class, "fazer_login"]);
 	/*
 	|----------------------------------------------------------------------
 	| CLIENTE
 	|----------------------------------------------------------------------
 	*/
-		Route::get("/", [Cliente_Controller::class, 'view_login']);
+		#Route::get("/", [Cliente_Controller::class, 'view_login']);
 		Route::get("Login-Cliente", [Cliente_Controller::class, 'view_login']);
 		Route::post("Fazer login Cliente", [Cliente_Controller::class, "fazer_login"]);
 /*
@@ -74,6 +75,16 @@ use App\Http\Controllers\Produto_Controller;
 			Route::get("Cliente/Logout", [Cliente_Controller::class, "logout"]);
 		});
 
+
+
+	/*
+	|----------------------------------------------------------------------
+	| VISITANTE
+	|----------------------------------------------------------------------
+	*/
+		Route::get("/", [Produto_Controller::class, 'visitante_consultar_produtos']);
+
+		Route::get("Visitante/Consultar-Produtos/{id_tipo_produto}", [Produto_Controller::class, "visitante_consultar_produtos"]);
 	/*
 	|----------------------------------------------------------------------
 	| PRODUTO

@@ -11,6 +11,8 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous">
 
+    <link rel="icon" href="{{ asset('image/Logotipo.jpg') }}" type="image/jpg">
+
 <style type="text/css">
 	
 	section#menu
@@ -53,18 +55,32 @@
 
 </style>
 
-<link rel="stylesheet" href="{{ asset('CSS/Menu_cliente.css') }}">
+<link rel="stylesheet" href="{{ asset('CSS/Menu_funcionario.css') }}">
 
 </script>
 
 </head>
 <body>
-	<ul>
-    	<li><a href="{{url('Funcionario/Cadastro-Produto')}}" class="mymenu" title="Home">Cadastrar produto</a></li>
-        <li><a href="{{url('Funcionario/Cadastro-Tipo')}}" class="mymenu" title="Home">Cadastrar um Tipo</a></li>
-    	<li><a href="{{url('Funcionario/Cadastro-Endereco')}}" class="mymenu" title="Sobre">Cadastrar um endereço</a></li>
-        <li><a href="{{url('Funcionario/Consultar-Vendas')}}" class="mymenu" title="Sobre">Consultar Vendas</a></li>
-        <li><a href="Logout" class="mymenu" title="Contato">Sair</a></li>
+	<ul class="mymenu">
+    	<li>
+            <a href="{{url('Funcionario/Cadastro-Produto')}}"
+            class="mymenu" title="Home">Cadastrar produto</a>
+        </li>
+        <li>
+            <a href="{{url('Funcionario/Cadastro-Tipo')}}"
+            class="mymenu" title="Home">Cadastrar um Tipo</a>
+        </li>
+    	<li>
+            <a href="{{url('Funcionario/Cadastro-Endereco')}}"
+            class="mymenu" title="Sobre">Cadastrar um endereço</a>
+        </li>
+        <li>
+            <a href="{{url('Funcionario/Consultar-Vendas')}}"
+            class="mymenu" title="Sobre">Consultar Vendas</a>
+        </li>
+        <li>
+            <a href="Logout" class="mymenu" title="Contato">Sair</a>
+        </li>
 	</ul>
 @yield('content')
 

@@ -24,7 +24,9 @@ class Produto_Controller extends Controller
 	*/
 		public function form_cadastro_produto()
 		{
-			return view("form.cadastro_produto");
+			$tipo_produto=Tipo_Produto::select("id_tipo_produto", "nome_tipo_produto")
+			->get();
+			return view("form.cadastro_produto", compact("tipo_produto"));
 		}
 
 		public function form_cadastro_tipo_produto()
@@ -42,12 +44,40 @@ class Produto_Controller extends Controller
 				"id_produto",
 				"nome_produto",
 				"valor_produto",
-				"imagem_produto"]);
+				"imagem_produto",
+				"produto.id_tipo_produto as id_tipo_produto"]);
 			if(!is_null($id_tipo_produto)) $query->where('id_tipo_produto', $id_tipo_produto);
+
+			$query->with('tipo_produto');
 		
-			$produto=$query->paginate(5);
+			$produto=$query->paginate(6);
+
 			return view("consult.consultar_produtos_cliente", compact("produto"));
+		}
+
+		public function visitante_consultar_produtos($id_tipo_produto=null)
+		{
+				$query=Produto::select([
+				"nome_produto",
+				"valor_produto",
+				"imagem_produto"]);
+			#if(!is_null($id_tipo_produto)) $query->where('id_tipo_produto', $id_tipo_produto);
+
+			if(!is_null($id_tipo_produto))
+			{
+				$query->where('id_tipo_produto', $id_tipo_produto);
+				$nome_tipo_produto=Tipo_Produto::where('id_tipo_produto', $id_tipo_produto)
+				->value('nome_tipo_produto');
+			}else
+			{
+				$nome_tipo_produto=null;
+			}
+
+			#$query->with('tipo_produto');
 		
+			$produto=$query->paginate(6);
+
+			return view("consult.consultar_produtos_visitante", compact("produto", "nome_tipo_produto"));
 		}
 
 		public function consultar_vendas()
@@ -66,8 +96,6 @@ class Produto_Controller extends Controller
 
 			return view("consult.consultar_vendas", compact("cliente"));
 		}
-
-
 	/*
 	|----------------------------------------------------------------------
 	| INSERT
@@ -78,7 +106,8 @@ class Produto_Controller extends Controller
 			$request->validate([
         	"input_nome_produto"=>"required",
         	"input_valor_produto"=>'required|regex:/^\d+(\.\d{1,2})?$/',
-        	"input_imagem_produto"=>'required|mimes:jpg,jpeg,png'
+        	"input_imagem_produto"=>'required|mimes:jpg,jpeg,png',
+        	"input_id_tipo_produto"=>'required'
 			]);
 			DB::beginTransaction();
         	try
@@ -86,12 +115,15 @@ class Produto_Controller extends Controller
         		$produto->nome_produto=$request->input_nome_produto;
         		$produto->valor_produto=$request->input_valor_produto;
         		$produto->imagem_produto=file_get_contents($request->file("input_imagem_produto"));
+        		$produto->id_tipo_produto=$request->input_id_tipo_produto;
         		$produto->save();
 
         		$estoque->id_produto=$produto->id_produto;
         		$estoque->numero_produto=0;
         		$estoque->save();
         		DB::commit();
+
+        		return back();
 
         	}catch (\Exception $e)
             {
@@ -137,6 +169,7 @@ class Produto_Controller extends Controller
 
 				DB::commit();
 				session()->forget('carrinho');
+				return back();
 			}catch (\Exception $e)
             {
         		DB::rollBack();
