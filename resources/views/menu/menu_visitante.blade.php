@@ -31,6 +31,8 @@
     body
     {
         margin-bottom: 50px;
+        background-repeat: no-repeat;
+        background-size: 100%;
     }
 
     table
@@ -64,6 +66,13 @@
         padding: 10px 0;         /* Espaçamento vertical da barra */ 
     }
 
+    .image-logo-bar
+    {
+        width: 500px;
+        height: 300px;
+        object-fit: cover;
+    }
+
     .card
     {
         font-family: 'Montserrat';
@@ -83,7 +92,7 @@
 </script>
 
 </head>
-<body>
+<body background="{{ asset('image/backgroud_branco.jpg') }}">
 
 <div class="logo-bar">
 
