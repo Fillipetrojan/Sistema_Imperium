@@ -135,11 +135,11 @@
     <h4>Contato</h4>
 
     <div data-mdb-input-init class="form-outline mb-4">
-        <input type="text" name="input_DDD" maxlength="2" minlength="2" 
-        placeholder="00"
-        id="id_DDD" class="form-control" />
-        <label class="form-label" for="id_DDD">DDD</label>
-      </div>
+      <input type="text" name="input_DDD" maxlength="2" minlength="2" 
+      placeholder="00"
+      id="id_DDD" class="form-control" />
+      <label class="form-label" for="id_DDD">DDD</label>
+    </div>
 
     <div data-mdb-input-init class="form-outline mb-4">
         <input type="text" name="input_numero_contato"
@@ -152,7 +152,7 @@
       <button  type="submit"
       data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
       Cadastrar
-    </button>
+      </button>
 
     </form>
 

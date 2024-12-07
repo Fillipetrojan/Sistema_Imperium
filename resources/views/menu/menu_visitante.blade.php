@@ -58,7 +58,6 @@
         margin-right: auto;
         width: 200px;
     }
-
     .logo-bar
     {
         background-color: rgba(14,14,13,255); /* Fundo preto  14,14,13,255*/
@@ -95,20 +94,16 @@
 <body background="{{ asset('image/backgroud_branco.jpg') }}">
 
 <div class="logo-bar">
-
     <img src="{{ asset('image/Logotipo.jpg') }}"
     alt="Logo da empresa"
     class="center">
 </div>
-
 	<ul class="mymenu font-white">
-    
     	<li>
             <a href="/"
             class="mymenu"
             title="Home">Todos os produtos</a>
         </li>
-
         @foreach($tipo_produto as $exibir_tipo_produto)
             <li>
                 <a class="mymenu"
@@ -116,9 +111,7 @@
                     {{$exibir_tipo_produto->nome_tipo_produto}}
                 </a>
             </li>
-
         @endforeach
-
 	</ul>
   
 @yield('content')

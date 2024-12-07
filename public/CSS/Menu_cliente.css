@@ -3,6 +3,7 @@ ul.mymenu
   width:100%; 
   float:left; 
   text-align:center; 
+  background-color: rgba(14,14,13,255);
 }
 li
 {
@@ -24,4 +25,3 @@ li .mymenu:hover
 {
   border-bottom:4px solid #4c4c4c;
 }
-

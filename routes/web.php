@@ -111,6 +111,8 @@ use App\Http\Controllers\Visitante_Controller;
 			Route::get("Funcionario/Cadastro-Produto", [Produto_Controller::class, "form_cadastro_produto"]);
 
 			Route::get("Funcionario/Consultar-Vendas", [Produto_Controller::class, "consultar_vendas"]);
+
+			Route::get("Funcionario/Consultar-Produtos", [Produto_Controller::class, "funcionario_consultar_produtos"]);
 		});
 
 
@@ -150,4 +152,8 @@ use App\Http\Controllers\Visitante_Controller;
 			Route::post("Funcionario/Cadastrar Produto", [Produto_Controller::class, 'cadastrar_produto']);
 
 			Route::post("Funcionario/Cadastrar Tipo", [Produto_Controller::class, 'cadastrar_tipo_produto']);
+
+			Route::post("Funcionario/Atualiza-produto", [Produto_Controller::class, "form_atualizar_produto"]);
+
+			Route::post("Funcionario/Atualizar-produto", [Produto_Controller::class, "atualizar_produto"]);
 		});

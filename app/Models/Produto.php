@@ -18,6 +18,7 @@ class Produto extends Model
     	"id_produto",
     	"valor_produto",
     	"id_tipo_produto",
+        "cod_do_fornecedor",
     	"imagem_produto"
     ];
 

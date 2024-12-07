@@ -33,6 +33,24 @@ class Produto_Controller extends Controller
 		{
 			return view("form.cadastro_tipo_produto");
 		}
+
+		public function form_atualizar_produto(Request $request)
+		{
+
+			$id_produto=$request->input_id_produto;
+			
+			$query_produto=Produto::select([
+				"id_produto",
+				"nome_produto",
+				"valor_produto",
+				"produto.id_tipo_produto as id_tipo_produto",
+				"cod_do_fornecedor"]);
+			
+
+			$produto=$query_produto->find($id_produto);
+			
+			return view("update.atualizar_produtos", compact("produto"));
+		}
 	/*
 	|----------------------------------------------------------------------
 	| SELECT
@@ -57,12 +75,11 @@ class Produto_Controller extends Controller
 
 		public function visitante_consultar_produtos($id_tipo_produto=null)
 		{
-				$query=Produto::select([
-				"nome_produto",
-				"valor_produto",
-				"imagem_produto"]);
-			#if(!is_null($id_tipo_produto)) $query->where('id_tipo_produto', $id_tipo_produto);
-
+			$query=Produto::select([
+			"nome_produto",
+			"valor_produto",
+			"imagem_produto"]);
+	
 			if(!is_null($id_tipo_produto))
 			{
 				$query->where('id_tipo_produto', $id_tipo_produto);
@@ -73,11 +90,25 @@ class Produto_Controller extends Controller
 				$nome_tipo_produto=null;
 			}
 
-			#$query->with('tipo_produto');
-		
 			$produto=$query->paginate(6);
 
 			return view("consult.consultar_produtos_visitante", compact("produto", "nome_tipo_produto"));
+		}
+
+
+		public function funcionario_consultar_produtos()
+		{
+			$query=Produto::select([
+				"id_produto",
+				"nome_produto",
+				"valor_produto",
+				"imagem_produto"])
+			->orderBy('id_tipo_produto')
+			->orderBy('nome_produto');
+
+			$produto=$query->paginate(6);
+
+			return view("consult.consultar_produtos_funcionario", compact("produto"));
 		}
 
 		public function consultar_vendas()
@@ -105,6 +136,7 @@ class Produto_Controller extends Controller
 		{
 			$request->validate([
         	"input_nome_produto"=>"required",
+        	"input_COD_fornecedor"=>"required",
         	"input_valor_produto"=>'required|regex:/^\d+(\.\d{1,2})?$/',
         	"input_imagem_produto"=>'required|mimes:jpg,jpeg,png',
         	"input_id_tipo_produto"=>'required'
@@ -113,6 +145,7 @@ class Produto_Controller extends Controller
         	try
         	{
         		$produto->nome_produto=$request->input_nome_produto;
+        		$produto->cod_do_fornecedor=$request->input_COD_fornecedor;
         		$produto->valor_produto=$request->input_valor_produto;
         		$produto->imagem_produto=file_get_contents($request->file("input_imagem_produto"));
         		$produto->id_tipo_produto=$request->input_id_tipo_produto;
@@ -259,4 +292,17 @@ class Produto_Controller extends Controller
 	| UPDATE
 	|----------------------------------------------------------------------
 	*/
+
+		public function atualizar_produto(Request $request)
+		{
+			$id_produto=$request->input_id_produto;
+			$produto=Produto::find($id_produto);
+
+			$produto->nome_produto=$request->input_nome_produto;
+        	$produto->valor_produto=$request->input_valor_produto;
+        	$produto->cod_do_fornecedor=$request->input_COD_fornecedor;
+
+			$produto->save();
+			return redirect()->intended('Funcionario/Consultar-Produtos');
+		}
 }

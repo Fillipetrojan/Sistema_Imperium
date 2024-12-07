@@ -18,6 +18,17 @@
 			placeholder="Nome do produto" aria-label="Username" aria-describedby="basic-addon1">
 		</div>
 
+
+		<div class="input-group mb-3">
+			<span class="input-group-text"
+			id="basic-addon1">
+				COD do fornecedor
+			</span>
+			<input type="text" class="form-control"
+			name="input_COD_fornecedor" required 
+			placeholder="0000" aria-label="Username" aria-describedby="basic-addon1">
+		</div>
+
 		<div class="input-group mb-3">
 			<span class="input-group-text"
 			id="basic-addon2" required>

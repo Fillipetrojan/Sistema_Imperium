@@ -13,6 +13,8 @@
 
     <link rel="icon" href="{{ asset('image/Logotipo.jpg') }}" type="image/jpg">
 
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
 <style type="text/css">
 	
 	section#menu
@@ -41,6 +43,26 @@
     {
         margin-bottom: 50px;
     }
+    .center
+    {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .logo-bar
+    {
+        background-color: rgba(14,14,13,255); /* Fundo preto  14,14,13,255*/
+        text-align: center;      /* Centraliza o conteúdo horizontalmente */
+        padding: 10px 0;         /* Espaçamento vertical da barra */ 
+    }
+
+    .image-logo-bar
+    {
+        width: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
     table
     {
@@ -48,9 +70,15 @@
     }
     .img_resolucao
     {
-        width: 100px;
+        width: auto;
         height: 200px;
         object-fit: cover; /* Ajusta a imagem para caber sem distorção */
+    }
+
+    .font-white
+    {
+        background-color: rgba(14,14,13,255);
+        color: rgb(255,255,255);
     }
 
 </style>
@@ -61,7 +89,14 @@
 
 </head>
 <body>
-	<ul class="mymenu">
+
+<div class="logo-bar">
+    <img src="{{ asset('image/Logotipo.jpg') }}"
+    alt="Logo da empresa"
+    class="image-logo-bar">
+</div>
+
+	<ul class="mymenu font-white">
     	<li>
             <a href="{{url('Funcionario/Cadastro-Produto')}}"
             class="mymenu" title="Home">Cadastrar produto</a>
@@ -77,6 +112,10 @@
         <li>
             <a href="{{url('Funcionario/Consultar-Vendas')}}"
             class="mymenu" title="Sobre">Consultar Vendas</a>
+        </li>
+        <li>
+            <a href="{{url('Funcionario/Consultar-Produtos')}}"
+            class="mymenu" title="Sobre">Consultar Produtos</a>
         </li>
         <li>
             <a href="Logout" class="mymenu" title="Contato">Sair</a>
