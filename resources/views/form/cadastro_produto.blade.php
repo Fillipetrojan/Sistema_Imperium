@@ -47,7 +47,7 @@
 			<input type="file" class="form-control"
 			name="input_imagem_produto"
 			aria-label="Username" aria-describedby="basic-addon1"
-			accept="image/*">
+			accept="image/*,.heic">
 		</div>
 
 		Tipo do produto
