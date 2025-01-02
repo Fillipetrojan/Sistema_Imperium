@@ -35,6 +35,10 @@
     {
         margin-top: 30px; 
     }
+    .margin-button
+    {
+        margin-bottom: 30px;
+    }
     .width
     {
         width: 80%;
@@ -117,6 +121,16 @@
             <a href="{{url('Funcionario/Consultar-Produtos')}}"
             class="mymenu" title="Sobre">Consultar Produtos</a>
         </li>
+
+
+        @foreach($tipo_produto as $exibir_tipo_produto)
+            <li>
+                <a class="mymenu"
+                href="{{ url('Funcionario/Consultar-Produtos')}}/{{$exibir_tipo_produto->id_tipo_produto}}">
+                    {{$exibir_tipo_produto->nome_tipo_produto}}
+                </a>
+            </li>
+        @endforeach
         <li>
             <a href="Logout" class="mymenu" title="Contato">Sair</a>
         </li>

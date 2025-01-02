@@ -96,15 +96,29 @@ class Produto_Controller extends Controller
 		}
 
 
-		public function funcionario_consultar_produtos()
+		public function funcionario_consultar_produtos($id_tipo_produto=null)
 		{
 			$query=Produto::select([
 				"id_produto",
 				"nome_produto",
 				"valor_produto",
-				"imagem_produto"])
+				"imagem_produto",
+				"cod_do_fornecedor",
+				"produto.id_tipo_produto"])
+			->with(["tipo_produto"])
 			->orderBy('id_tipo_produto')
-			->orderBy('nome_produto');
+			->orderBy('nome_produto')
+			->orderBy('cod_do_fornecedor');
+
+			if(!is_null($id_tipo_produto))
+			{
+				$query->where('id_tipo_produto', $id_tipo_produto);
+				$nome_tipo_produto=Tipo_Produto::where('id_tipo_produto', $id_tipo_produto)
+				->value('nome_tipo_produto');
+			}else
+			{
+				$nome_tipo_produto=null;
+			}
 
 			$produto=$query->paginate(6);
 

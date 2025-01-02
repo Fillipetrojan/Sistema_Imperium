@@ -27,13 +27,32 @@
     body
     {
         margin-bottom: 50px;
+        background-repeat: no-repeat;
+        background-size: 100%;
     }
-
+    .center
+    {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+    }
+    .logo-bar
+    {
+        background-color: rgba(14,14,13,255); /* Fundo preto  14,14,13,255*/
+        text-align: center;      /* Centraliza o conteúdo horizontalmente */
+        padding: 10px 0;         /* Espaçamento vertical da barra */ 
+    }
+    .image-logo-bar
+    {
+        width: 500px;
+        height: 300px;
+        object-fit: cover;
+    }
     table
     {
     	width: 80%;
     }
-
     .img_resolucao
     {
         width: auto;
@@ -53,6 +72,15 @@
 
 </head>
 <body>
+
+<body background="{{ asset('image/backgroud_branco.jpg') }}">
+
+<div class="logo-bar">
+    <img src="{{ asset('image/Logotipo.jpg') }}"
+    alt="Logo da empresa"
+    class="center">
+</div>
+
 	<ul class="mymenu">
         <h1>IMPERIUM</h1>
     	<li>
@@ -81,27 +109,14 @@
             title="Contato">Sair</a>
         </li>
 
-        <li>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Produtos
-                </button>
-                <ul class="dropdown-menu">
-                    @foreach($tipo_produto as $exibir_tipo_produto)
-                        <li>
-                            <a class="dropdown-item"
-                            href="{{ url('Cliente/Consultar-Produtos') }}/{{$exibir_tipo_produto->id_tipo_produto}}">
-                                {{$exibir_tipo_produto->nome_tipo_produto}}
-                            </a>
-                        </li>
-                    @endforeach
-                    
-                </ul>
-            </div>
-        </li>
+        @foreach($tipo_produto as $exibir_tipo_produto)
+            <li>
+                <a class="mymenu"
+                href="{{ url('Visitante/Consultar-Produtos')}}/{{$exibir_tipo_produto->id_tipo_produto}}">
+                    {{$exibir_tipo_produto->nome_tipo_produto}}
+                </a>
+            </li>
+        @endforeach
 	</ul>
 
 @yield('content')

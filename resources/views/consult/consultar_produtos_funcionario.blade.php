@@ -15,7 +15,9 @@
 						class="card-img-top img_resolucao" alt="Imagem do Card">
 						<div class="card-body">
 							<h5 class="card-title">{{$exibir_produto->nome_produto}}</h5>
+							<h5 class="card-title">COD: {{$exibir_produto->cod_do_fornecedor}}</h5>
 							<p class="card-text">R${{$exibir_produto->valor_produto}}</p>
+							<p class="card-text">{{$exibir_produto->tipo_produto->nome_tipo_produto}}</p>
 							<input type="hidden" name="input_id_produto"
 							value="{{ $exibir_produto->id_produto }}">
 

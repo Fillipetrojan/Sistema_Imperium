@@ -35,7 +35,7 @@
 				Valor R$
 			</span>
 			<input type="number" step="0.01" class="form-control"
-			name="input_valor_produto"
+			name="input_valor_produto" required 
 			placeholder="00.00" aria-label="Username" aria-describedby="basic-addon1">
 		</div>
 
@@ -51,7 +51,7 @@
 		</div>
 
 		Tipo do produto
-		<ul class="list-group">
+		<ul class="list-group margin-button">
 			@foreach($tipo_produto as $exibir_tipo_produto)
 			<label>
 			<li class="list-group-item text-left">
@@ -59,7 +59,8 @@
 					<input type="radio"
 					name="input_id_tipo_produto"
 					value="{{$exibir_tipo_produto->id_tipo_produto}}" 
-					aria-label="Radio button for following text input">
+					aria-label="Radio button for following text input"
+					required>
 					{{$exibir_tipo_produto->nome_tipo_produto}}
 			</li>
 			</label>

@@ -41,5 +41,12 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
+        View::composer("menu.menu_funcionario", function ($view)
+        {
+            $tipo_produto=Tipo_Produto::all();
+            $view->with("tipo_produto", $tipo_produto);
+        });
+
+
     }
 }

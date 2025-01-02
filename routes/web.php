@@ -113,6 +113,8 @@ use App\Http\Controllers\Visitante_Controller;
 			Route::get("Funcionario/Consultar-Vendas", [Produto_Controller::class, "consultar_vendas"]);
 
 			Route::get("Funcionario/Consultar-Produtos", [Produto_Controller::class, "funcionario_consultar_produtos"]);
+
+			Route::get("Funcionario/Consultar-Produtos/{id_tipo_produto}", [Produto_Controller::class, "funcionario_consultar_produtos"]);
 		});
 
 
