@@ -146,7 +146,7 @@ use App\Http\Controllers\Visitante_Controller;
 
 		Route::middleware(['auth:cliente'])->group(function ()
 		{
-			Route::post("Cliente/Adicionar Ao Carrinho", [Produto_Controller::class, "adicionar_ao_carrinho"]);
+			Route::post("Cliente/Consultar-Produtos/Adicionar-Ao-Carrinho", [Produto_Controller::class, "adicionar_ao_carrinho"]);
 		});
 
 		Route::middleware(['auth:funcionario'])->group(function ()

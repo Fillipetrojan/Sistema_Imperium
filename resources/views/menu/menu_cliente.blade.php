@@ -112,7 +112,7 @@
         @foreach($tipo_produto as $exibir_tipo_produto)
             <li>
                 <a class="mymenu"
-                href="{{ url('Visitante/Consultar-Produtos')}}/{{$exibir_tipo_produto->id_tipo_produto}}">
+                href="{{ url('Cliente/Consultar-Produtos')}}/{{$exibir_tipo_produto->id_tipo_produto}}">
                     {{$exibir_tipo_produto->nome_tipo_produto}}
                 </a>
             </li>
