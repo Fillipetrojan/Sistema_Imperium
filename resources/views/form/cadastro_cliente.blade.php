@@ -22,7 +22,7 @@
 
   <div>
 
-    <form action="Cadastrar Cliente" method="POST">
+    <form action="Cadastrar-Cliente" method="POST">
     @csrf
     <div data-mdb-input-init class="form-outline mb-4">
         <input type="text" name="input_nome_cliente" required 

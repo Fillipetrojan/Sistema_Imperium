@@ -21,7 +21,7 @@
 
   <div>
 
-    <form action="Fazer login Cliente" method="post">
+    <form action="Fazer-login-Cliente" method="post">
     @csrf
       <!-- Email input -->
       <div data-mdb-input-init class="form-outline mb-4">

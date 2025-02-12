@@ -6,7 +6,7 @@
 
 <div class="input_margin">
 
-	<form action="Cadastrar Produto" method="post" enctype="multipart/form-data">
+	<form action="Cadastrar-Produto" method="post" enctype="multipart/form-data">
 		@csrf
 		<div class="input-group mb-3">
 			<span class="input-group-text"

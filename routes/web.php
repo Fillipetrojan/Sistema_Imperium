@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Funcionario_Controller;
@@ -9,7 +8,6 @@ use App\Http\Controllers\Cliente_Controller;
 use App\Http\Controllers\Endereco_Controller;
 use App\Http\Controllers\Produto_Controller;
 use App\Http\Controllers\Visitante_Controller;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +20,6 @@ use App\Http\Controllers\Visitante_Controller;
 |
 */
 
-
 /*
 |--------------------------------------------------------------------------
 | LOGIN
@@ -34,7 +31,7 @@ use App\Http\Controllers\Visitante_Controller;
 	|----------------------------------------------------------------------
 	*/
 		Route::get("Login-Funcionario", [Funcionario_Controller::class, 'view_login']);
-		Route::post("Fazer login Funcionario", [Funcionario_Controller::class, "fazer_login"]);
+		Route::post("Fazer-login-Funcionario", [Funcionario_Controller::class, "fazer_login"]);
 	/*
 	|----------------------------------------------------------------------
 	| CLIENTE
@@ -42,7 +39,7 @@ use App\Http\Controllers\Visitante_Controller;
 	*/
 		#Route::get("/", [Cliente_Controller::class, 'view_login']);
 		Route::get("Login-Cliente", [Cliente_Controller::class, 'view_login']);
-		Route::post("Fazer login Cliente", [Cliente_Controller::class, "fazer_login"]);
+		Route::post("Fazer-login-Cliente", [Cliente_Controller::class, "fazer_login"]);
 /*
 |--------------------------------------------------------------------------
 | GET
@@ -53,20 +50,18 @@ use App\Http\Controllers\Visitante_Controller;
 	| FUNCIONARIO
 	|----------------------------------------------------------------------
 	*/
-		Route::get("/Cadastro Funcionario", [Funcionario_Controller::class, 'form_cadastro_funcionario']);
+		Route::get("/Cadastro-Funcionario", [Funcionario_Controller::class, 'form_cadastro_funcionario']);
 
 		Route::middleware(['auth:funcionario'])->group(function ()
 		{
 			Route::get("Funcionario/Logout", [Funcionario_Controller::class, "logout"]);
 		});
-
 	/*
 	|----------------------------------------------------------------------
 	| CLIENTE
 	|----------------------------------------------------------------------
 	*/
-
-		Route::get("/Cadastro Cliente", [Cliente_Controller::class, 'form_cadastro_cliente']);
+		Route::get("/Cadastro-Cliente", [Cliente_Controller::class, 'form_cadastro_cliente']);
 
 		Route::middleware(['auth:cliente'])->group(function ()
 		{
@@ -74,9 +69,6 @@ use App\Http\Controllers\Visitante_Controller;
 
 			Route::get("Cliente/Logout", [Cliente_Controller::class, "logout"]);
 		});
-
-
-
 	/*
 	|----------------------------------------------------------------------
 	| VISITANTE
@@ -90,7 +82,6 @@ use App\Http\Controllers\Visitante_Controller;
 	| PRODUTO
 	|----------------------------------------------------------------------
 	*/
-
 		Route::middleware(['auth:cliente'])->group(function ()
 		{
 			Route::get("Cliente/Apagar-Carrinho", [Produto_Controller::class, "apagar_carrinho"]);
@@ -116,34 +107,28 @@ use App\Http\Controllers\Visitante_Controller;
 
 			Route::get("Funcionario/Consultar-Produtos/{id_tipo_produto}", [Produto_Controller::class, "funcionario_consultar_produtos"]);
 		});
-
-
-		#
-
 /*
 |--------------------------------------------------------------------------
 | POST
 |--------------------------------------------------------------------------
 */
-
 	/*
 	|----------------------------------------------------------------------
 	| FUNCIONARIO
 	|----------------------------------------------------------------------
 	*/
-		Route::post("/Cadastrar Funcionario", [Funcionario_Controller::class, 'cadastrar_funcionario']);
+		Route::post("/Cadastrar-Funcionario", [Funcionario_Controller::class, 'cadastrar_funcionario']);
 	/*
 	|----------------------------------------------------------------------
 	| CLIENTE
 	|----------------------------------------------------------------------
 	*/
-		Route::post("/Cadastrar Cliente", [Cliente_Controller::class, 'cadastrar_cliente']);
+		Route::post("/Cadastrar-Cliente", [Cliente_Controller::class, 'cadastrar_cliente']);
 	/*
 	|----------------------------------------------------------------------
 	| PRODUTO
 	|----------------------------------------------------------------------
 	*/
-
 		Route::middleware(['auth:cliente'])->group(function ()
 		{
 			Route::post("Cliente/Consultar-Produtos/Adicionar-Ao-Carrinho", [Produto_Controller::class, "adicionar_ao_carrinho"]);
@@ -151,9 +136,9 @@ use App\Http\Controllers\Visitante_Controller;
 
 		Route::middleware(['auth:funcionario'])->group(function ()
 		{
-			Route::post("Funcionario/Cadastrar Produto", [Produto_Controller::class, 'cadastrar_produto']);
+			Route::post("Funcionario/Cadastrar-Produto", [Produto_Controller::class, 'cadastrar_produto']);
 
-			Route::post("Funcionario/Cadastrar Tipo", [Produto_Controller::class, 'cadastrar_tipo_produto']);
+			Route::post("Funcionario/Cadastrar-Tipo", [Produto_Controller::class, 'cadastrar_tipo_produto']);
 
 			Route::post("Funcionario/Atualiza-produto", [Produto_Controller::class, "form_atualizar_produto"]);
 

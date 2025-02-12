@@ -18,7 +18,7 @@
 
   <div>
 
-    <form action="Cadastrar Funcionario" method="POST">
+    <form action="Cadastrar-Funcionario" method="POST">
     @csrf
     <div data-mdb-input-init class="form-outline mb-4">
         <input type="text" name="input_nome_funcionario" required

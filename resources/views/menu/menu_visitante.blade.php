@@ -112,6 +112,21 @@
                 </a>
             </li>
         @endforeach
+        
+        <li>
+            <a href="/Cadastro-Cliente"
+            class="mymenu btn btn-secondary"
+            title="Home">Faça seu cadastro aqui!!</a>
+        </li>
+
+        <li>
+            <a href="/Login-Cliente"
+            class="mymenu btn btn-success"
+            title="Home">Faça seu Login aqui!!</a>
+        </li>
+
+
+
 	</ul>
   
 @yield('content')

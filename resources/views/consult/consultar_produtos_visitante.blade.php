@@ -19,7 +19,7 @@
 
         case "Anel":
         	$mensagem= "Para pessoas finas!";
-        	$imagem = 'image/anel.jpg';
+        	$imagem = 'image/Anel.jpg';
         break;
 
         Case "Joia":
@@ -29,14 +29,15 @@
 
         default:
             $mensagem = 'Conheça nossos produtos!';
-            $imagem = 'image/Logotipo.jpg';
+            $imagem = null;
     }
 @endphp
 
 <div class="logo-bar font-white">
 	<h1 class="text-center">{{$mensagem}}</h1>
-
-	<img src="{{ asset($imagem) }}" class="image-logo-bar">
+	@if(isset($imagem))
+		<img src="{{ asset($imagem) }}" class="image-logo-bar">
+	@endif
 </div>
 
 <div class="container mt-4">

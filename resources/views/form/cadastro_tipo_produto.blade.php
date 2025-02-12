@@ -6,7 +6,7 @@
 
 
 <div class="input_margin">
-	<form action="Cadastrar Tipo" method="POST">
+	<form action="Cadastrar-Tipo" method="POST">
 	@csrf
 		<div class="mb-3">
 			<label for="id_nome_tipo_produto" class="form-label">Tipo de Produto</label>
