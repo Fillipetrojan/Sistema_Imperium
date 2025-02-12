@@ -61,7 +61,7 @@ use App\Http\Controllers\Visitante_Controller;
 	| CLIENTE
 	|----------------------------------------------------------------------
 	*/
-		Route::get("/Cadastro-Cliente", [Cliente_Controller::class, 'form_cadastro_cliente']);
+		Route::get("Cadastro-Cliente", [Cliente_Controller::class, 'form_cadastro_cliente']);
 
 		Route::middleware(['auth:cliente'])->group(function ()
 		{
