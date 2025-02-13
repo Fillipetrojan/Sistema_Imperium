@@ -16,76 +16,6 @@
 
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 
-<style type="text/css">
-	
-	section#menu
-    {
-    	float: left;
-    	position: relative;
-    }
-    .margin-left
-    {
-        margin-left: 20px;
-        width: 80%;
-    }
-    body
-    {
-        margin-bottom: 50px;
-        background-repeat: no-repeat;
-        background-size: 100%;
-    }
-
-    table
-    {
-    	width: 80%;
-    }
-
-    .img_resolucao
-    {
-        width: auto;
-        height: 400px;
-        object-fit: cover; /* Ajusta a imagem para caber sem distorção */
-    }
-    .margin-20
-    {
-        margin-top: 20px;
-    }
-
-    .center
-    {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 200px;
-    }
-    .logo-bar
-    {
-        background-color: rgba(14,14,13,255); /* Fundo preto  14,14,13,255*/
-        text-align: center;      /* Centraliza o conteúdo horizontalmente */
-        padding: 10px 0;         /* Espaçamento vertical da barra */ 
-    }
-
-    .image-logo-bar
-    {
-        width: 500px;
-        height: 300px;
-        object-fit: cover;
-    }
-
-    .card
-    {
-        font-family: 'Montserrat';
-        font-size: 22px;
-    }
-
-    .font-white
-    {
-        color: rgb(255,255,255);
-    }
-
-
-</style>
-
 <link rel="stylesheet" href="{{ asset('CSS/Menu_cliente.css') }}">
 
 </script>
@@ -96,7 +26,7 @@
 <div class="logo-bar">
     <img src="{{ asset('image/Logotipo.jpg') }}"
     alt="Logo da empresa"
-    class="center">
+    class="image-logo-bar center">
 </div>
 	<ul class="mymenu font-white">
     	<li>
@@ -114,13 +44,14 @@
         @endforeach
         
         <li>
-            <a href="Cadastro-Cliente"
+            <a href="{{url('Cadastro-Cliente')}}"
             class="mymenu btn btn-secondary"
             title="Home">Faça seu cadastro aqui!!</a>
         </li>
 
         <li>
-            <a href="Login-Cliente"
+            <a href="{{url('Login-Cliente')}}"
+
             class="mymenu btn btn-success"
             title="Home">Faça seu Login aqui!!</a>
         </li>

@@ -15,84 +15,13 @@
 
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 
-<style type="text/css">
-	
-	section#menu
-    {
-    	float: left;
-    	position: relative;
-    }
-    .input_margin
-    {
-    	margin-left: 20px;
-        width: 60%;
-    }
-    .margin-left
-    {
-        margin-left: 20px;
-    }
-    .margin_top
-    {
-        margin-top: 30px; 
-    }
-    .margin-button
-    {
-        margin-bottom: 30px;
-    }
-    .width
-    {
-        width: 80%;
-    }
-    body
-    {
-        margin-bottom: 50px;
-    }
-    .center
-    {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .logo-bar
-    {
-        background-color: rgba(14,14,13,255); /* Fundo preto  14,14,13,255*/
-        text-align: center;      /* Centraliza o conteúdo horizontalmente */
-        padding: 10px 0;         /* Espaçamento vertical da barra */ 
-    }
-
-    .image-logo-bar
-    {
-        width: 200px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    table
-    {
-    	width: 80%;
-    }
-    .img_resolucao
-    {
-        width: auto;
-        height: 200px;
-        object-fit: cover; /* Ajusta a imagem para caber sem distorção */
-    }
-
-    .font-white
-    {
-        background-color: rgba(14,14,13,255);
-        color: rgb(255,255,255);
-    }
-
-</style>
 
 <link rel="stylesheet" href="{{ asset('CSS/Menu_funcionario.css') }}">
 
 </script>
 
 </head>
-<body>
+<body background="{{ asset('image/backgroud_branco.jpg') }}">
 
 <div class="logo-bar">
     <img src="{{ asset('image/Logotipo.jpg') }}"

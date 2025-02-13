@@ -108,10 +108,10 @@
         </div>
 
       <div data-mdb-input-init class="form-outline mb-4">
-          <input type="text" name="input_bairro" required
+          <input type="text" name="input_bairro"
           placeholder="Nome do Bairro" 
           id="id_bairro" class="form-control" />
-          <label class="form-label" for="id_bairro">Bairro</label>
+          <label class="form-label" for="id_bairro">Bairro (opcional)</label>
         </div>
 
       <div data-mdb-input-init class="form-outline mb-4">

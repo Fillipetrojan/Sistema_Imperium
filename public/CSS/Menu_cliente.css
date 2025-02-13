@@ -25,3 +25,90 @@ li .mymenu:hover
 {
   border-bottom:4px solid #4c4c4c;
 }
+
+
+
+
+
+
+
+section#menu
+{
+    float: left;
+    position: relative;
+}
+.margin-left
+{
+    margin-left: 20px;
+    width: 80%;
+}
+
+.input_width-80
+{
+    width: 80%;
+}
+
+.input_width-60
+{
+    width: 60%;
+}
+
+
+.input_minimal
+{
+    width: min-content;
+}
+
+
+.input_width-40
+{
+    width: 40%;
+}
+
+
+.label-input
+{
+    border-radius: 10px;
+    border: 1px solid #ccc; /* Só pra visualizar melhor */
+    padding: 5px 10px;
+}
+
+body
+{
+    margin-bottom: 50px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.center
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+.logo-bar
+{
+    background-color: rgba(14,14,13,255); /* Fundo preto  14,14,13,255*/
+    text-align: center;  /* Centraliza o conteúdo horizontalmente */
+    padding: 10px 0; /* Espaçamento vertical da barra */ 
+}
+.image-logo-bar
+{
+    width: 500px;
+    height: 300px;
+    object-fit: cover;
+}
+table
+{
+    width: 80%;
+}
+.img_resolucao
+{
+    width: auto;
+    height: 200px;
+    object-fit: cover; /* Ajusta a imagem para caber sem distorção */
+}
+.margin-20
+{
+    margin-top: 20px;
+}

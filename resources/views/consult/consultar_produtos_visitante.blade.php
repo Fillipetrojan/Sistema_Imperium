@@ -34,7 +34,7 @@
 @endphp
 
 <div class="logo-bar font-white">
-	<h1 class="text-center">{{$mensagem}}</h1>
+	<h1 class="text-center text-white">{{$mensagem}}</h1>
 	@if(isset($imagem))
 		<img src="{{ asset($imagem) }}" class="image-logo-bar">
 	@endif

@@ -40,6 +40,7 @@ use App\Http\Controllers\Visitante_Controller;
 		#Route::get("/", [Cliente_Controller::class, 'view_login']);
 		Route::get("Login-Cliente", [Cliente_Controller::class, 'view_login']);
 		Route::post("Fazer-login-Cliente", [Cliente_Controller::class, "fazer_login"]);
+		
 /*
 |--------------------------------------------------------------------------
 | GET
@@ -65,7 +66,9 @@ use App\Http\Controllers\Visitante_Controller;
 
 		Route::middleware(['auth:cliente'])->group(function ()
 		{
-			Route::get("Cliente/Cadastro-Endereco", [Endereco_Controller::class, "form_cadastro_endereco"]);
+			#Route::get("Cliente/Cadastro-Endereco", [Endereco_Controller::class, "form_cadastro_endereco"]);
+
+			Route::get("Cliente/Endereco", [Endereco_Controller::class, "form_att_endereco"]);
 
 			Route::get("Cliente/Logout", [Cliente_Controller::class, "logout"]);
 		});
@@ -132,6 +135,8 @@ use App\Http\Controllers\Visitante_Controller;
 		Route::middleware(['auth:cliente'])->group(function ()
 		{
 			Route::post("Cliente/Consultar-Produtos/Adicionar-Ao-Carrinho", [Produto_Controller::class, "adicionar_ao_carrinho"]);
+
+			Route::post("Cliente/Atualizar-Endereco", [Endereco_Controller::class, "att_endereco"]);
 		});
 
 		Route::middleware(['auth:funcionario'])->group(function ()

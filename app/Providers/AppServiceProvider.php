@@ -33,13 +33,11 @@ class AppServiceProvider extends ServiceProvider
             $view->with("tipo_produto", $tipo_produto);
         });
 
-
         View::composer("menu.menu_visitante", function ($view)
         {
             $tipo_produto=Tipo_Produto::all();
             $view->with("tipo_produto", $tipo_produto);
         });
-
 
         View::composer("menu.menu_funcionario", function ($view)
         {

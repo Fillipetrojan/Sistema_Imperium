@@ -83,7 +83,7 @@ class Cliente_Controller extends Controller
 	            return redirect()->intended('Cliente/Consultar-Produtos');
 	        }else
 	        {
-	            
+	            echo "Senha errada";
 	        }
 		}
 

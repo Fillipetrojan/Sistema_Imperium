@@ -135,7 +135,7 @@ class Funcionario_Controller extends Controller
 
 		public function fazer_login(Request $request)
 		{
-
+			
 			$email_funcionario = $request->input_email_funcionario;
 	        $senha_funcionario=$request->input_senha_funcionario;
 
@@ -153,8 +153,8 @@ class Funcionario_Controller extends Controller
 		    {
 		        return back();
 		    }
-		}
 
+		}
 		public function logout(Request $request)
     	{
 	        Auth::logout();

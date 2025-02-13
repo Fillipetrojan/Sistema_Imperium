@@ -66,11 +66,21 @@ class Produto_Controller extends Controller
 				"produto.id_tipo_produto as id_tipo_produto"]);
 			if(!is_null($id_tipo_produto)) $query->where('id_tipo_produto', $id_tipo_produto);
 
+			if(!is_null($id_tipo_produto))
+			{
+				$query->where('id_tipo_produto', $id_tipo_produto);
+				$nome_tipo_produto=Tipo_Produto::where('id_tipo_produto', $id_tipo_produto)
+				->value('nome_tipo_produto');
+			}else
+			{
+				$nome_tipo_produto=null;
+			}
+
 			$query->with('tipo_produto');
 		
 			$produto=$query->paginate(6);
 
-			return view("consult.consultar_produtos_cliente", compact("produto"));
+			return view("consult.consultar_produtos_cliente", compact("produto", "nome_tipo_produto"));
 		}
 
 		public function visitante_consultar_produtos($id_tipo_produto=null)
