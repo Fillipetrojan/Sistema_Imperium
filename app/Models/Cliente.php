@@ -29,7 +29,8 @@ class Cliente extends Authenticatable
     	"sexo_cliente",
     	"nascimento_cliente",
     	"email_cliente",
-        "password"
+        "password",
+        "id_app_max"
     ];
 
     protected $hidden = ['password'];

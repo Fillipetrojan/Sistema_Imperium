@@ -9,8 +9,13 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Cliente;
 use App\Models\Endereco;
 use App\Models\Contato;
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\AppMax_Controller;
+
+
 
 class Cliente_Controller extends Controller
 {
@@ -79,6 +84,9 @@ class Cliente_Controller extends Controller
 
 	            session(['usuario_id' => $usuario->id_cliente]);
 	            session(['usuario_email' => $usuario->email_cliente]);
+	            session(['usuario_CPF' => $usuario->CPF_cliente]);
+
+	            session(['usuario_id_app_max' => $usuario->id_app_max]);
 
 	            return redirect()->intended('Cliente/Consultar-Produtos');
 	        }else
@@ -121,41 +129,55 @@ class Cliente_Controller extends Controller
 	        	}
 
 	        	// Cliente
-		        $cliente->nome_cliente=$request->input_nome_cliente;
-		        $cliente->CPF_cliente=$request->input_CPF_cliente;
-		        $cliente->sexo_cliente=$request->input_sexo_cliente;
-		        $cliente->nascimento_cliente=$request->input_nascimento_cliente;
-		        $senha_cliente_cry=Hash::make($request->input_password_cliente);
-		        $cliente->email_cliente=$request->input_email_cliente;
-		        $cliente->password=$senha_cliente_cry;
+	        	
+			        $cliente->nome_cliente=$request->input_nome_cliente;
+			        $cliente->CPF_cliente=$request->input_CPF_cliente;
+			        $cliente->sexo_cliente=$request->input_sexo_cliente;
+			        $cliente->nascimento_cliente=$request->input_nascimento_cliente;
+			        $senha_cliente_cry=Hash::make($request->input_password_cliente);
+			        $cliente->email_cliente=$request->input_email_cliente;
+			        $cliente->password=$senha_cliente_cry;
+
+		        // Integração com APP MAX
+
+
+			        $appMaxController = new AppMax_Controller();
+	    			$resultado = $appMaxController->Cadastrar_cliente_App_Max($request);
+
+					$id_app_max_cliente = $resultado->getData()->data->id;
+
+					$cliente->id_app_max=intval($id_app_max_cliente);
+
+
 		        $cliente->save();
 		        $id_cliente=$cliente->id_cliente;
 
 		        //Endereço
-		        $endereco->id_dono=$id_cliente;
-		        $endereco->numero_rua=$request->input_numero_rua;
-		        $endereco->nome_rua=$request->input_nome_rua;
-		        $endereco->complemento=$request->input_complemento;
-		        $endereco->CEP=$request->input_CEP;
-		        $endereco->bairro=$request->input_bairro;
-		        $endereco->cidade=$request->input_cidade;
-		        $endereco->estado=$request->input_estado;
-		        $endereco->save();
+			        $endereco->id_dono=$id_cliente;
+			        $endereco->numero_rua=$request->input_numero_rua;
+			        $endereco->nome_rua=$request->input_nome_rua;
+			        $endereco->complemento=$request->input_complemento;
+			        $endereco->CEP=$request->input_CEP;
+			        $endereco->bairro=$request->input_bairro;
+			        $endereco->cidade=$request->input_cidade;
+			        $endereco->estado=$request->input_estado;
+			        $endereco->save();
 
 		        //Contato
-		        $contato->id_dono=$id_cliente;
-		        $contato->DDD_contato=$request->input_DDD;
-		        $contato->numero_contato=$request->input_numero_contato;
-		        $contato->save();
+			        $contato->id_dono=$id_cliente;
+			        $contato->DDD_contato=$request->input_DDD;
+			        $contato->numero_contato=$request->input_numero_contato;
+			        $contato->save();
 
 		        DB::commit();
-	            return back();
+
+	            //return back();
 
             }catch (\Exception $e)
             {
         		DB::rollBack();
         		return response()->json(
-        			['error' => 'Erro ao criar cliente' . $e->getMessage()], 500
+        			['error' => $e->getMessage()], 500
         		);
         	}
 

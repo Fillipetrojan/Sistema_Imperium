@@ -134,7 +134,7 @@ use App\Http\Controllers\Visitante_Controller;
 	*/
 		Route::middleware(['auth:cliente'])->group(function ()
 		{
-			Route::post("Cliente/Consultar-Produtos/Adicionar-Ao-Carrinho", [Produto_Controller::class, "adicionar_ao_carrinho"]);
+			Route::post("Cliente/Adicionar-Ao-Carrinho", [Produto_Controller::class, "adicionar_ao_carrinho"]);
 
 			Route::post("Cliente/Atualizar-Endereco", [Endereco_Controller::class, "att_endereco"]);
 		});

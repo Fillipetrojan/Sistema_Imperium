@@ -13,6 +13,9 @@ use App\Models\Produto_Venda;
 use App\Models\Tipo_Produto;
 use Carbon\Carbon;
 
+
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 use Illuminate\Support\Facades\DB;
 
 class Produto_Controller extends Controller
@@ -201,6 +204,9 @@ class Produto_Controller extends Controller
 			try
 			{
 				$id_usuario=session("usuario_id");
+
+				$id_usuario_app_max=session("usuario_id_app_max");
+
 				$venda->id_cliente=$id_usuario;
 				$venda->data=Carbon::now();
 				$venda->save();
@@ -220,13 +226,33 @@ class Produto_Controller extends Controller
 					$valor_total+=$exibir_carrinho['valor_total'];
 					$venda->valor_venda=$valor_total;
 					$venda->numero_produtos=$quantidade_total;
-					$venda->save();
+
+
+					$appMaxController = new AppMax_Controller();
+
+					$resultado_pedido=$appMaxController->Cadastrar_pedido_App_Max($request, $id_usuario_app_max);
+
+					$id_pedido = $resultado_pedido->getData()->data->id;
+
+
+					$Resultado_PIX=$appMaxController->Gerar_Pix($id_pedido, $id_usuario_app_max, "87501493340");
+
+
+					$QR_code = $Resultado_PIX['data']['pix_qrcode'];
+
+					$copia_cola = $Resultado_PIX['data']['pix_emv'];
+
+					DB::rollBack();
+
+					return view("api.QR_code_App_max", compact("QR_code", "copia_cola"));
+
+					//$venda->save();
 
 				}// foreach ($carrinho as $exibir_carrinho => $item_carrinho)
 
-				DB::commit();
+				//DB::commit();
 				session()->forget('carrinho');
-				return back();
+				//return back();
 			}catch (\Exception $e)
             {
         		DB::rollBack();

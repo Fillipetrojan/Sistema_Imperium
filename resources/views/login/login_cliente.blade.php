@@ -23,7 +23,7 @@
 
   <div>
 
-    <form action="{{url('Fazer-login-Funcionario')}}" method="post">
+    <form action="{{url('Fazer-login-Cliente')}}" method="post">
     @csrf
       <!-- Email input -->
       <div data-mdb-input-init class="form-outline mb-4">
