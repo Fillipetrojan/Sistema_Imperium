@@ -12,6 +12,8 @@ use App\Models\Cliente;
 use App\Models\Produto_Venda;
 use App\Models\Tipo_Produto;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+
 
 
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -83,7 +85,11 @@ class Produto_Controller extends Controller
 		
 			$produto=$query->paginate(6);
 
+			Log::info("Teste Log");
+
 			return view("consult.consultar_produtos_cliente", compact("produto", "nome_tipo_produto"));
+
+
 		}
 
 		public function visitante_consultar_produtos($id_tipo_produto=null)
@@ -107,7 +113,6 @@ class Produto_Controller extends Controller
 
 			return view("consult.consultar_produtos_visitante", compact("produto", "nome_tipo_produto"));
 		}
-
 
 		public function funcionario_consultar_produtos($id_tipo_produto=null)
 		{
@@ -196,21 +201,47 @@ class Produto_Controller extends Controller
 
 		public function fazer_compra(Request $request, Produto $produto, Venda $venda)
 		{
-			$carrinho = session('carrinho', []);
-
 			$quantidade_total=0;
 			$valor_total=0;
 			DB::beginTransaction();
-			try
-			{
+			#try
+			#{
+				$carrinho = session('carrinho', []);
+
 				$id_usuario=session("usuario_id");
 
 				$id_usuario_app_max=session("usuario_id_app_max");
 
+				$CPF_usuario=session("usuario_CPF");
+
+				/// APP MAX
+					$appMaxController = new AppMax_Controller();
+
+					$carrinho = session('carrinho', []);
+
+					$resultado_pedido=$appMaxController->Cadastrar_pedido_App_Max($request, $id_usuario_app_max, $carrinho);
+
+					$id_pedido = $resultado_pedido->getData()->data->id;
+
+					$Resultado_PIX=$appMaxController->Gerar_Pix($id_pedido, $id_usuario_app_max, $CPF_usuario);
+
+					$QR_code = $Resultado_PIX['data']['pix_qrcode'];
+
+					#$QR_code=$Resultado_PIX->getData()->data->pix_qrcode;
+
+					$copia_cola = $Resultado_PIX['data']['pix_emv'];
+
+					#$copia_cola = $Resultado_PIX->getData()->data->pix_emv;
+
+					var_dump($resultado_pedido);
+				
 				$venda->id_cliente=$id_usuario;
+				$venda->id_app_max=intval($id_pedido);
 				$venda->data=Carbon::now();
 				$venda->save();
 				$id_venda = $venda->id_venda;
+
+				$carrinho = session('carrinho', []);
 				
 				foreach ($carrinho as $exibir_carrinho)
 				{
@@ -224,43 +255,35 @@ class Produto_Controller extends Controller
 
 					$quantidade_total+=$exibir_carrinho['quantidade'];
 					$valor_total+=$exibir_carrinho['valor_total'];
-					$venda->valor_venda=$valor_total;
-					$venda->numero_produtos=$quantidade_total;
-
-
-					$appMaxController = new AppMax_Controller();
-
-					$resultado_pedido=$appMaxController->Cadastrar_pedido_App_Max($request, $id_usuario_app_max);
-
-					$id_pedido = $resultado_pedido->getData()->data->id;
-
-
-					$Resultado_PIX=$appMaxController->Gerar_Pix($id_pedido, $id_usuario_app_max, "87501493340");
-
-
-					$QR_code = $Resultado_PIX['data']['pix_qrcode'];
-
-					$copia_cola = $Resultado_PIX['data']['pix_emv'];
-
-					DB::rollBack();
-
-					return view("api.QR_code_App_max", compact("QR_code", "copia_cola"));
-
-					//$venda->save();
-
+					
+					
 				}// foreach ($carrinho as $exibir_carrinho => $item_carrinho)
 
-				//DB::commit();
+				$venda->valor_venda=$valor_total;
+				$venda->numero_produtos=$quantidade_total;
+
+				$venda->save();
+				DB::commit();
+
 				session()->forget('carrinho');
-				//return back();
+				return view("api.QR_code_App_max", compact("QR_code", "copia_cola"));
+
+
+			/*
 			}catch (\Exception $e)
             {
         		DB::rollBack();
         		session()->forget('carrinho');
+        		
         		return response()->json(
-        			['error' => 'Erro ao fazer compra' . $e->getMessage()], 500
+        			['error' => 'Erro ao fazer compra. ' . $e->getMessage()], 500
         		);
         	}
+        	*/
+
+        	
+
+
 		}// public function fazer_compra
 
 
@@ -285,7 +308,7 @@ class Produto_Controller extends Controller
 			    if ($item['id'] === $request->input_id_produto)
 			    {
 			        $item['quantidade'] += 1; // Atualiza a quantidade
-			        $item['valor_total']=$item['quantidade']*intval($request->input_valor_produto);
+			        $item['valor_total']=$item['quantidade']*floatval($request->input_valor_produto);
 			        $isset_produto = true;
 			        break;
 			    }
@@ -297,7 +320,7 @@ class Produto_Controller extends Controller
 				[
 			        'id' => $request->input_id_produto,
 			        'quantidade' => 1,
-			        'valor_total'=>intval($request->input_valor_produto),
+			        'valor_total'=>floatval($request->input_valor_produto),
 			        'nome_produto'=>$request->input_nome_produto
 			    ];
 			}
@@ -355,4 +378,5 @@ class Produto_Controller extends Controller
 			$produto->save();
 			return redirect()->intended('Funcionario/Consultar-Produtos');
 		}
+
 }

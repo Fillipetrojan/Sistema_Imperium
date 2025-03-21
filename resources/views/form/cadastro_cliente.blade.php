@@ -11,22 +11,17 @@
 
     <link rel="icon" href="{{ asset('image/Logotipo.jpg') }}" type="image/jpg">
 
-
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 
     <link rel="stylesheet" href="{{ asset('CSS/Menu_cliente.css') }}">
 
-
-
   </head>
 <body background="{{ asset('image/backgroud_branco.jpg') }}">
-
 
 <div class="logo-bar font-white">
     <h1 class="text-center text-white">Faça seu cadastro para poder realizar compras!!</h1>
 
 </div>
-
 
   <div>
 

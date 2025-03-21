@@ -12,10 +12,13 @@ class Venda extends Model
     
     protected $fillable =[
     	"id_venda",
+        "id_app_max",
+        "status_venda",
     	"id_cliente",
     	"valor_venda",
     	"numero_produtos",
-    	"data"
+    	"data",
+        "data_pagamento"
     ];
     
     public function produto()

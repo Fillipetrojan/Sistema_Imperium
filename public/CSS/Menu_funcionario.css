@@ -29,79 +29,85 @@ li .mymenu:hover
 
 
 
+section#menu
+{
+    float: left;
+    position: relative;
+}
+.input_margin
+{
+    margin-left: 20px;
+    width: 60%;
+}
+
+.margin-left
+{
+    margin-left: 20px;   
+}
+.margin_top
+{
+    margin-top: 30px; 
+}
+.margin-button
+{
+    margin-bottom: 30px;
+}
+
+
+.padding
+{
+    padding: 10px;
+}
+
+
+.width
+{
+    width: 80%;
+}
+
+body
+{
+    margin-bottom: 50px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.center
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.logo-bar
+{
+    background-color: rgba(14,14,13,255); /* Fundo preto  14,14,13,255*/
+    text-align: center;      /* Centraliza o conteúdo horizontalmente */
+    padding: 10px 0;         /* Espaçamento vertical da barra */ 
+}
+
+.image-logo-bar
+{
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table
+{
+width: 80%;
+}
+.img_resolucao
+{
+    width: auto;
+    height: 200px;
+    object-fit: cover; /* Ajusta a imagem para caber sem distorção */
+}
+
+.font-white
+{
+    background-color: rgba(14,14,13,255);
+    color: rgb(255,255,255);
+}
 
 
 
-
-
-
-
-    section#menu
-    {
-        float: left;
-        position: relative;
-    }
-    .input_margin
-    {
-        margin-left: 20px;
-        width: 60%;
-    }
-    .margin-left
-    {
-        margin-left: 20px;
-    }
-    .margin_top
-    {
-        margin-top: 30px; 
-    }
-    .margin-button
-    {
-        margin-bottom: 30px;
-    }
-    .width
-    {
-        width: 80%;
-    }
-    body
-    {
-        margin-bottom: 50px;
-        background-repeat: no-repeat;
-        background-size: 100%;
-    }
-    .center
-    {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .logo-bar
-    {
-        background-color: rgba(14,14,13,255); /* Fundo preto  14,14,13,255*/
-        text-align: center;      /* Centraliza o conteúdo horizontalmente */
-        padding: 10px 0;         /* Espaçamento vertical da barra */ 
-    }
-
-    .image-logo-bar
-    {
-        width: 200px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    table
-    {
-        width: 80%;
-    }
-    .img_resolucao
-    {
-        width: auto;
-        height: 200px;
-        object-fit: cover; /* Ajusta a imagem para caber sem distorção */
-    }
-
-    .font-white
-    {
-        background-color: rgba(14,14,13,255);
-        color: rgb(255,255,255);
-    }

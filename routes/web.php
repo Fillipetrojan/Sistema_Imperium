@@ -8,6 +8,7 @@ use App\Http\Controllers\Cliente_Controller;
 use App\Http\Controllers\Endereco_Controller;
 use App\Http\Controllers\Produto_Controller;
 use App\Http\Controllers\Visitante_Controller;
+use App\Http\Controllers\AppMax_Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -149,3 +150,5 @@ use App\Http\Controllers\Visitante_Controller;
 
 			Route::post("Funcionario/Atualizar-produto", [Produto_Controller::class, "atualizar_produto"]);
 		});
+
+		Route::post("webhook/pagamento", [AppMax_Controller::class, 'atualizar_venda']);

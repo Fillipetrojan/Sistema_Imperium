@@ -10,6 +10,8 @@
     class="margin-left-60"
     src="data:image/png;base64, {{ $QR_code}}" alt="QR Code PIX">
 
+    <h3>Copia e cola: {{$copia_cola}}</h3>
+
 
 
 
