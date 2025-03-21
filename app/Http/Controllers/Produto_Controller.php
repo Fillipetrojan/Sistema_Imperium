@@ -14,8 +14,6 @@ use App\Models\Tipo_Produto;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
-
-
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 use Illuminate\Support\Facades\DB;
@@ -88,8 +86,6 @@ class Produto_Controller extends Controller
 			Log::info("Teste Log");
 
 			return view("consult.consultar_produtos_cliente", compact("produto", "nome_tipo_produto"));
-
-
 		}
 
 		public function visitante_consultar_produtos($id_tipo_produto=null)
@@ -152,12 +148,42 @@ class Produto_Controller extends Controller
 				"email_cliente")
 			->with([
 				"venda.produto",
+				"venda" => function ($query)
+				{
+            		$query->orderBy("data", "desc") // Ordena as vendas pela data
+            		->orderBy("status_venda", "asc");
+        		},
 				"endereco",
 				"contato"])
 			->whereHas('venda')
 			->get();
 
 			return view("consult.consultar_vendas", compact("cliente"));
+		}
+
+		public function consultar_vendas_cliente()
+		{
+			$id_usuario=session("usuario_id");
+
+			$cliente=Cliente::select(
+				"cliente.id_cliente as id_cliente",
+				"nome_cliente",
+				"CPF_cliente",
+				"email_cliente")
+			->with([
+				"venda.produto",
+				"venda" => function ($query)
+				{
+            		$query->orderBy("data", "desc") // Ordena as vendas pela data
+            		->orderBy("status_venda", "asc");
+        		},
+				"endereco",
+				"contato"])
+			->whereHas('venda')
+			->where("id_cliente", "=", $id_usuario)
+			->get();
+
+			return view("consult.consultar_vendas_cliente", compact("cliente"));
 		}
 	/*
 	|----------------------------------------------------------------------
@@ -204,8 +230,8 @@ class Produto_Controller extends Controller
 			$quantidade_total=0;
 			$valor_total=0;
 			DB::beginTransaction();
-			#try
-			#{
+			try
+			{
 				$carrinho = session('carrinho', []);
 
 				$id_usuario=session("usuario_id");
@@ -227,13 +253,9 @@ class Produto_Controller extends Controller
 
 					$QR_code = $Resultado_PIX['data']['pix_qrcode'];
 
-					#$QR_code=$Resultado_PIX->getData()->data->pix_qrcode;
-
 					$copia_cola = $Resultado_PIX['data']['pix_emv'];
 
-					#$copia_cola = $Resultado_PIX->getData()->data->pix_emv;
-
-					var_dump($resultado_pedido);
+					#var_dump($resultado_pedido);
 				
 				$venda->id_cliente=$id_usuario;
 				$venda->id_app_max=intval($id_pedido);
@@ -245,7 +267,6 @@ class Produto_Controller extends Controller
 				
 				foreach ($carrinho as $exibir_carrinho)
 				{
-
 					Produto_Venda::create([
 					"id_venda"=>$id_venda,
 					"id_produto"=>$exibir_carrinho['id'],
@@ -255,7 +276,6 @@ class Produto_Controller extends Controller
 
 					$quantidade_total+=$exibir_carrinho['quantidade'];
 					$valor_total+=$exibir_carrinho['valor_total'];
-					
 					
 				}// foreach ($carrinho as $exibir_carrinho => $item_carrinho)
 
@@ -267,9 +287,7 @@ class Produto_Controller extends Controller
 
 				session()->forget('carrinho');
 				return view("api.QR_code_App_max", compact("QR_code", "copia_cola"));
-
-
-			/*
+			
 			}catch (\Exception $e)
             {
         		DB::rollBack();
@@ -279,11 +297,7 @@ class Produto_Controller extends Controller
         			['error' => 'Erro ao fazer compra. ' . $e->getMessage()], 500
         		);
         	}
-        	*/
-
         	
-
-
 		}// public function fazer_compra
 
 
@@ -377,6 +391,29 @@ class Produto_Controller extends Controller
 
 			$produto->save();
 			return redirect()->intended('Funcionario/Consultar-Produtos');
+		}
+	/*
+	|----------------------------------------------------------------------
+	| APP_MAX
+	|----------------------------------------------------------------------
+	*/
+		public function Pagar_pedido($id_pedido=null)
+		{
+			$id_app_max_cliente=session("usuario_id_app_max");
+
+			$id_cliente=session("usuario_id");
+
+			$CPF_cliente=session("usuario_CPF");
+
+			$appMaxController = new AppMax_Controller();
+
+			$Resultado_PIX=$appMaxController->Gerar_Pix($id_pedido, $id_app_max_cliente, $CPF_cliente);
+
+			$QR_code = $Resultado_PIX['data']['pix_qrcode'];
+
+			$copia_cola = $Resultado_PIX['data']['pix_emv'];
+
+			return view("api.QR_code_App_max", compact("QR_code", "copia_cola"));
 		}
 
 }

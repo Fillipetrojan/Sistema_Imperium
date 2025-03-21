@@ -140,14 +140,12 @@ class Cliente_Controller extends Controller
 
 		        // Integração com APP MAX
 
-
 			        $appMaxController = new AppMax_Controller();
 	    			$resultado = $appMaxController->Cadastrar_cliente_App_Max($request);
 
 					$id_app_max_cliente = $resultado->getData()->data->id;
 
 					$cliente->id_app_max=intval($id_app_max_cliente);
-
 
 		        $cliente->save();
 		        $id_cliente=$cliente->id_cliente;

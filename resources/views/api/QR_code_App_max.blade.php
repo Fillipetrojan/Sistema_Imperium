@@ -12,7 +12,4 @@
 
     <h3>Copia e cola: {{$copia_cola}}</h3>
 
-
-
-
 @endsection

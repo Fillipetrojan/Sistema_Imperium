@@ -64,6 +64,11 @@
         @endforeach
 
         <li>
+            <a href="{{url('Cliente/Consultar-Minhas-Compras')}}"
+            class="mymenu" title="Sobre">Minhas Compras</a>
+        </li>
+
+        <li>
             <a href="{{url('Cliente/Logout')}}"
             class="mymenu btn btn-danger"
             title="Sair">Sair</a>

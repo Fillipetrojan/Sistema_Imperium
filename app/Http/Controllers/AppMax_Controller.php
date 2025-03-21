@@ -13,14 +13,11 @@ class AppMax_Controller extends Controller
 
     private $url = 'https://homolog.sandboxappmax.com.br/api/v3/';
     private $token_homologacao = 'DFED62FB-53F0A3BB-842D0EDF-FC18D5B0';
-
-
     /*
     |----------------------------------------------------------------------
     | INSERT
     |----------------------------------------------------------------------
     */
-
         public function Cadastrar_cliente_App_Max($request)
         {
             $nomeCompleto = $request->input_nome_cliente;
@@ -80,19 +77,15 @@ class AppMax_Controller extends Controller
 
             return response()->json($response->json());
         }
-
-
-
     /*
     |----------------------------------------------------------------------
     | PAGAMENTOS
     |----------------------------------------------------------------------
     */
-
         public function Gerar_Pix($id_pedido, $id_cliente, $CPF_cliente)
         {
 
-            $expiration_date = Carbon::now()->addDays(1)->format('Y-m-d H:i:s');
+            $expiration_date = Carbon::now()->addMinutes(5)->format('Y-m-d H:i:s');
 
             $response = Http::post($this->url."payment/pix", [
                 'access-token' => $this->token_homologacao,
@@ -135,5 +128,4 @@ class AppMax_Controller extends Controller
 
         $venda->save();
     }
-
 }

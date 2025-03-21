@@ -97,6 +97,10 @@ use App\Http\Controllers\AppMax_Controller;
 			Route::get("Cliente/Consultar-Produtos/{id_tipo_produto}", [Produto_Controller::class, "cliente_consultar_produtos"]);
 
 			Route::get("Cliente/Consultar-Produtos", [Produto_Controller::class, "cliente_consultar_produtos"]);
+
+			Route::get("Cliente/Consultar-Minhas-Compras", [Produto_Controller::class, "consultar_vendas_cliente"]);
+
+			Route::get("Cliente/Gerar-Pix/{id_pedido}", [Produto_Controller::class, "Pagar_pedido"]);
 		});
 
 		Route::middleware(['auth:funcionario'])->group(function ()
